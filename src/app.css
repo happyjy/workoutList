@@ -135,7 +135,7 @@ body {
 /*  */
 /* 오른쪽 */
 /*  */
-.workoutTypeContainer {
+.workoutContentsContainer {
   display: flex;
   flex-direction: column;
   border-radius: 4px;

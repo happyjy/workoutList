@@ -7,7 +7,7 @@ const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutin
     <img data-index="{{index}}" id="edit" class="icon" src="./img/editIcon.png" />
   </span>
   <span data-index="{{index}}" class="workoutRoutineDeleteBtn">
-    <img data-index="{{index}}" id="cancel" class="icon" src="./img/cancelIcon.png" />
+    <img data-index="{{index}}" id="delete" class="icon" src="./img/deleteIcon.png" />
   </span>
 </div>
 </div>`;
@@ -52,7 +52,6 @@ export function appendWorkoutRountine(templateDomList = []) {
   console.log('### appendWorkoutRountine');
   const copy = [...templateDomList];
   copy.forEach((node) => {
-    console.log(node.firstElementChild.dataset);
     targetWorkoutRoutineListContainer.appendChild(node);
   });
 }
