@@ -27,14 +27,16 @@ input[type='text'] {
 
 body {
   /* font-family: "PT Serif", serif; */
-  background-color: #f0efeb;
+
+  /* background-color: #f0efeb; */
+  background-color: #e9ecee;
   /* margin: 50px auto 0px; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.workOutRegistContinaer {
+.workoutRegistContinaer {
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -44,30 +46,27 @@ body {
 }
 
 /* 매일 운동 루틴 */
-.workOutRegistHeader {
+.workoutRegistHeader {
   text-align: center;
   height: 4vh;
   line-height: 4vh;
   margin-bottom: 10px;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: #ffffff;
 }
 
-.workOutContainer {
-  height: 100%;
-}
-
-.workOutContainer {
+.workoutContainer {
   display: grid;
   grid-template-columns: 1.5fr 3fr;
   grid-auto-rows: 100%;
-  margin: 10px 0px;
+  height: 100%;
 }
 
 /*  */
 /* 왼쪽 */
 /*  */
-.workOutRoutineContentsContainer {
+.workoutRoutineContentsContainer {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -94,10 +93,11 @@ body {
   line-height: 30px;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: #ffffff;
 }
 
 /* 운동루틴 list container */
-.workOutRoutineListContainer {
+.workoutRoutineListContainer {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -110,11 +110,11 @@ body {
 .registWorkOutRoutineContainer {
   margin-bottom: 10px;
 }
-.workOutRoutineList {
+.workoutRoutineList {
   width: 100%;
   /* padding: 0 10px; */
 }
-.workOutRoutine {
+.workoutRoutine {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -126,7 +126,7 @@ body {
 /*  */
 /* 오른쪽 */
 /*  */
-.workOutTypeContainer {
+.workoutTypeContainer {
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -142,18 +142,19 @@ body {
   line-height: 30px;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: #ffffff;
 }
 
 /* 삭제 */
-.workOutdeleteBtn {
+.workoutdeleteBtn {
   padding: 0 10px;
-  background-color: tomato;
   /* height: 2vh;
   line-height: 2vh; */
   height: 30px;
   line-height: 30px;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: tomato;
 }
 
 .toolbar {
@@ -172,35 +173,40 @@ body {
   flex-direction: row;
 }
 
-.workOutListContainer {
+.totalTime {
+  display: inline-flex;
+  align-items: center;
+}
+
+.workoutListContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-.workOutListNestedContainer {
+.workoutListNestedContainer {
   flex: 6;
   align-items: stretch;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid black;
 }
-.workOutList {
+.workoutList {
   display: flex;
   flex-direction: column;
 }
-.workOutList:last-child {
+.workoutList:last-child {
   /* border: 1px solid black; */
 }
-.workOutListContentsContainer {
+.workoutListContentsContainer {
 }
-.workOut {
+.workout {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 7px;
 }
-.workOut:last-child {
+.workout:last-child {
   /* margin-bottom: 0px !important;
   border: 1px solid saddlebrown; */
 }
@@ -245,8 +251,8 @@ body {
   flex-direction: row;
   justify-content: flex-end;
 }
-.saveBtnRegistWorkOut,
-.cancelBtnRegistWorkOut {
+.saveBtnRegistWorkOutBtn,
+.cancelBtnRegistWorkOutBtn {
   text-align: center;
   /* width: 10vw; */
   width: 100%;
@@ -257,9 +263,10 @@ body {
   margin-right: 10px;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: #ffffff;
 }
 
-.cancelBtnRegistWorkOut {
+.cancelBtnRegistWorkOutBtn {
   margin-right: 0px !important;
 }
 /* 운동 시작 */
@@ -270,4 +277,5 @@ body {
   line-height: 4vh;
   border-radius: 4px;
   border: 1px black solid;
+  background-color: #ffffff;
 }
