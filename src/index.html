@@ -10,6 +10,8 @@
 <body>
   <!-- <div id="app"></div> -->
   <!-- <dd>dd</dd> -->
+  <!-- <div id="app">
+  </div> -->
   <div class="workoutRegistContinaer">
     <!-- 상단헤더 -->
     <div class="workoutRegistHeader"> 매일 운동 루틴 </div>
@@ -19,37 +21,336 @@
       <div class="workoutRoutineContentsContainer">
         <!-- 운동루틴목록 툴바 -->
         <div class="toolbarContainer">
-          <div class="newWorkOutRoutineBtn">새 운동 루틴 +</div>
+          <div id="registerWorkoutRoutine" class="newWorkOutRoutineBtn">새 운동 루틴 +</div>
         </div>
 
         <!-- 운동루틴목록 -->
-        <div class="workoutRoutineListContainer">
-          <div class="registWorkOutRoutineContainer">
-            <input type="text" />
+        <div class="workoutRoutineListContentsContainer">
+          <div id="targetRegisterWorkoutRoutine" class="registWorkOutRoutineContainer">
+            <input id="targetRegisterWorkoutRoutineInput" type="text" />
           </div>
           <!-- # update 되어야 할 부분 -->
-          <div class="workoutRoutineList">
-            <div class="workoutRoutine">
+          <div id="targetWorkoutRoutineListContainer" class="workoutRoutineListContainer">
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div data-index="1" class="workoutRoutineButtonContainer">
+                <span data-index="1" class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span data-index="1" class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
               <span class="workoutRoutineTtitle">1분운동</span>
               <div class="workoutRoutineButtonContainer">
-                <span class="workoutRoutineEditBtn">Edit</span>
-                <span class="workoutRoutineDeleteBtn">X</span>
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
               </div>
-            </div>
-            <div class="workoutRoutine">
+            </div> -->
+            <!-- <div class="workoutRoutine">
               <span class="workoutRoutineTtitle">2분운동</span>
               <div class="workoutRoutineButtonContainer">
-                <span class="workoutRoutineEditBtn">Edit</span>
-                <span class="workoutRoutineDeleteBtn">X</span>
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
               </div>
-            </div>
-            <div class="workoutRoutine">
+            </div> -->
+
+            <!-- <div class="workoutRoutine">
               <span class="workoutRoutineTtitle">3분운동</span>
               <div class="workoutRoutineButtonContainer">
-                <span class="workoutRoutineEditBtn">Edit</span>
-                <span class="workoutRoutineDeleteBtn">X</span>
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
               </div>
-            </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
+            <!-- <div class="workoutRoutine">
+              <span class="workoutRoutineTtitle">3분운동</span>
+              <div class="workoutRoutineButtonContainer">
+                <span class="workoutRoutineEditBtn">
+                  <img id="edit" class="icon" src="./img/editIcon.png" />
+                </span>
+                <span class="workoutRoutineDeleteBtn">
+                  <img id="cancel" class="icon" src="./img/cancelIcon.png" />
+                </span>
+              </div>
+            </div> -->
           </div>
         </div>
 
@@ -117,6 +418,7 @@
 
       </div>
     </div>
+  </div>
   </div>
 
   <script src="../dist/bundle.js"></script>
