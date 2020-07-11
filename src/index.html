@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <div id="app"></div> -->
+  <!-- <dd>dd</dd> -->
+
+  <div class="workOutRegistContinaer">
+    <!-- 상단헤더 -->
+    <div class="workOutRegistHeader"> 매일 운동 루틴 </div>
+
+    <div class="workOutContainer">
+      <!-- 운동루틴목록 컨테이너 -->
+      <div class="workOutRoutineContentsContainer">
+        <!-- 운동루틴목록 툴바 -->
+        <div class="toolbarContainer">
+          <div class="newWorkOutRoutineBtn">새 운동 루틴 +</div>
+        </div>
+
+        <!-- 운동루틴목록 -->
+        <div class="workOutRoutineListContainer">
+          <div class="registWorkOutRoutineContainer">
+            <input type="text" />
+          </div>
+          <!-- # update 되어야 할 부분 -->
+          <div class="workOutRoutineList">
+            <div class="workOutRoutine">
+              <span class="workOutRoutineTtitle">1분운동</span>
+              <div class="workOutRoutineButtonContainer">
+                <span class="workOutRoutineEditBtn">Edit</span>
+                <span class="workOutRoutineDeleteBtn">X</span>
+              </div>
+            </div>
+            <div class="workOutRoutine">
+              <span class="workOutRoutineTtitle">2분운동</span>
+              <div class="workOutRoutineButtonContainer">
+                <span class="workOutRoutineEditBtn">Edit</span>
+                <span class="workOutRoutineDeleteBtn">X</span>
+              </div>
+            </div>
+            <div class="workOutRoutine">
+              <span class="workOutRoutineTtitle">3분운동</span>
+              <div class="workOutRoutineButtonContainer">
+                <span class="workOutRoutineEditBtn">Edit</span>
+                <span class="workOutRoutineDeleteBtn">X</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 운동목록 컨테이너 -->
+      <div class="workOutTypeContainer">
+        <!-- 운동목록 툴바 -->
+        <div class="toolbarContainer">
+          <div class="toolbar">
+            <div class="toolbarLeft">
+              <div class="newWorkoutBtn"> + 운동 추가</div>
+              <div class="workOutdeleteBtn"> 삭제 </div>
+            </div>
+            <div class="toolbarRight">
+              <span class="totalTime">전체 시간 4분 25초</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 운동목록 리스트 컨테이너 -->
+        <div class="workOutListContainer">
+          <div class="workOutListNestedContainer">
+            <div class="workOutList">
+              <!-- # update 되어야 할 부분 -->
+              <!-- workOut 목록 리스트-->
+              <div class="workOutListContentsContainer">
+                <div class="workOut">
+                  <span class="workOutTitle">스트레칭운동 60초 3세트</span>
+                  <span class="workOutIcon">Edit</span>
+                </div>
+                <div class="workOut">
+                  <span class="workOutTitle">플랭크 60초 3세트</span>
+                  <span class="workOutIcon">Edit</span>
+                </div>
+                <div class="workOut">
+                  <span class="workOutTitle">스쿼트 60초 3세트</span>
+                  <span class="workOutIcon">Edit</span>
+                </div>
+              </div>
+              <!-- 운동추가 -->
+              <div class="registWorkOutContainer">
+                <div class="registWorkOutHeader">
+                  <div class="registWorkOutHeaderLeft">
+                    <span>이름</span>
+                    <input type="text" />
+                  </div>
+
+                  <div class="registWorkOutHeaderRight">
+                    <input type="text" />
+                    <span>초</span>
+                    <input type="text" />
+                    <span>세트</span>
+                  </div>
+                </div>
+                <div class="registWorkOutFooter">
+                  <div class="saveBtnRegistWorkOut">저장</div>
+                  <div class="cancelBtnRegistWorkOut">취소</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="startWorkOutBtn">운동 시작</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../dist/bundle.js"></script>
+</body>
+
+</html>
