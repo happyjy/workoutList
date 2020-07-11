@@ -1,5 +1,8 @@
 console.log('### common');
 
+/**
+ * 1. 새 운동 루틴
+ */
 const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutine">
 <span data-index="{{index}}" class="workoutRoutineTtitle">{{title}}</span>
 <div data-index="{{index}}" class="workoutRoutineButtonContainer">
@@ -12,11 +15,12 @@ const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutin
 </div>
 </div>`;
 
+//새 운동 루틴 컨테이너
 const targetWorkoutRoutineListContainer = document.getElementById(
   'targetWorkoutRoutineListContainer',
 );
 
-const toggleRegisterWorkoutRoutineInput = (mode = '', index = '') => {
+export function toggleRegisterWorkoutRoutineInput(mode = '', index = '') {
   let display = '';
 
   if (targetRegisterWorkoutRoutine.style.display === 'block') {
@@ -33,7 +37,7 @@ const toggleRegisterWorkoutRoutineInput = (mode = '', index = '') => {
   }
   targetRegisterWorkoutRoutine.dataset.mode = mode;
   targetRegisterWorkoutRoutine.style.display = display;
-};
+}
 
 export function getWorkoutRountineListDom(workoutRoutineListDummyData = []) {
   console.log('### getWorkoutRountineListDom');
@@ -55,3 +59,7 @@ export function appendWorkoutRountine(templateDomList = []) {
     targetWorkoutRoutineListContainer.appendChild(node);
   });
 }
+
+/**
+ * 운동 추가
+ */

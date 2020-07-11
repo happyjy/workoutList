@@ -1,4 +1,8 @@
-import { getWorkoutRountineListDom, appendWorkoutRountine } from './common.js';
+import {
+  getWorkoutRountineListDom,
+  appendWorkoutRountine,
+  toggleRegisterWorkoutRoutineInput,
+} from './common.js';
 import { workoutRoutineList, setWorkoutRoutineList } from './dummyData.js';
 
 console.log(
@@ -22,17 +26,17 @@ const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutin
 
 // 새 운동 루틴 기능
 // 새 운동 루틴 버튼
-const targetRegisterWorkoutRoutine = document.getElementById(
+const targetRegisterWorkoutRoutineDom = document.getElementById(
   'targetRegisterWorkoutRoutine',
 );
 
 // 새 운동 루틴 추가 input box
-const targetRegisterWorkoutRoutineInput = document.getElementById(
+const targetRegisterWorkoutRoutineInputDom = document.getElementById(
   'targetRegisterWorkoutRoutineInput',
 );
 
 // 새 운동 루틴 추가 컨테이너
-const targetWorkoutRoutineListContainer = document.getElementById(
+const targetWorkoutRoutineListContainerDom = document.getElementById(
   'targetWorkoutRoutineListContainer',
 );
 
@@ -128,7 +132,7 @@ document
     // targetRegisterWorkoutRoutine.style.display = display;
 
     //새 운동 루틴 버튼 추가시 자동으로 focus
-    targetRegisterWorkoutRoutineInput.focus();
+    targetRegisterWorkoutRoutineInputDom.focus();
 
     //[]TODO 가로 길이 늘어남
   });
@@ -143,7 +147,7 @@ document
       //TODO data-set list index 추가
       const inputTitle = e.target.value;
 
-      switch (targetRegisterWorkoutRoutine.dataset.mode) {
+      switch (targetRegisterWorkoutRoutineDom.dataset.mode) {
         case 'new':
           const replaceWorkoutRoutineTemplate = workoutRoutineTemplate
             .replace(/\{\{index\}\}/g, `${workoutRoutineList.length + 1}`)
@@ -154,7 +158,7 @@ document
             'text/html',
           ).body.firstChild;
 
-          targetWorkoutRoutineListContainer.prepend(templateDom);
+          targetWorkoutRoutineListContainerDom.prepend(templateDom);
 
           // workoutRoutineList에 push
           workoutRoutineList.push({
@@ -168,7 +172,7 @@ document
           debugger;
           // update workoutRoutineList
           const updateWorkoutRoutineList = workoutRoutineList.map((v) => {
-            if (v.index === targetRegisterWorkoutRoutine.dataset.editIndex) {
+            if (v.index === targetRegisterWorkoutRoutineDom.dataset.editIndex) {
               var date = new Date();
               v.title = inputTitle;
               v.regDate = date++;
@@ -181,7 +185,7 @@ document
 
           // title update 방법 1: 업데이트한 dummydata로 운동 루틴 컨테이너 다 지고 다시 그리기
           // update 새 운동 루틴 추가 컨테이너 with workoutRoutineList;
-          targetWorkoutRoutineListContainer.innerHTML = '';
+          targetWorkoutRoutineListContainerDom.innerHTML = '';
           const templateDomList = getWorkoutRountineListDom(workoutRoutineList);
           appendWorkoutRountine(templateDomList);
 
@@ -230,7 +234,7 @@ document
       case 'edit':
         console.log('### 운동 루틴 edit');
         //[X]TODO 입력부 show
-        if (targetRegisterWorkoutRoutine.style.display !== 'block') {
+        if (targetRegisterWorkoutRoutineDom.style.display !== 'block') {
           toggleRegisterWorkoutRoutineInput('edit', e.target.dataset.index);
         }
 
@@ -238,8 +242,8 @@ document
         const clickedRoutine = workoutRoutineList.filter(
           (v) => v.index === e.target.dataset.index,
         )[0];
-        targetRegisterWorkoutRoutineInput.value = clickedRoutine.title;
-        targetRegisterWorkoutRoutineInput.focus();
+        targetRegisterWorkoutRoutineInputDom.value = clickedRoutine.title;
+        targetRegisterWorkoutRoutineInputDom.focus();
         //[X]TODO 입력부에 포커스, enter로 수정모드 완료(운동 루틴 이름 변경)
 
         //[]TODO ESC누르면 최소(입력부 제거)
@@ -253,7 +257,7 @@ document
           const willNotDeleteOne = workoutRoutineList.filter(
             (v) => v.index !== e.target.dataset.index,
           );
-          targetWorkoutRoutineListContainer.innerHTML = '';
+          targetWorkoutRoutineListContainerDom.innerHTML = '';
 
           const templateDomList = getWorkoutRountineListDom(willNotDeleteOne);
           appendWorkoutRountine(templateDomList);
@@ -269,24 +273,24 @@ document
 // common function
 // 새 운동 루틴 추가 input box
 
-const toggleRegisterWorkoutRoutineInput = (mode = '', index = '') => {
-  let display = '';
+// const toggleRegisterWorkoutRoutineInput = (mode = '', index = '') => {
+//   let display = '';
 
-  if (targetRegisterWorkoutRoutine.style.display === 'block') {
-    display = 'none';
-    mode = '';
-    targetRegisterWorkoutRoutineInput.value = '';
-  } else {
-    display = 'block';
-    mode = mode;
+//   if (targetRegisterWorkoutRoutine.style.display === 'block') {
+//     display = 'none';
+//     mode = '';
+//     targetRegisterWorkoutRoutineInput.value = '';
+//   } else {
+//     display = 'block';
+//     mode = mode;
 
-    if (mode === 'edit') {
-      targetRegisterWorkoutRoutine.dataset.editIndex = index;
-    }
-  }
-  targetRegisterWorkoutRoutine.dataset.mode = mode;
-  targetRegisterWorkoutRoutine.style.display = display;
-};
+//     if (mode === 'edit') {
+//       targetRegisterWorkoutRoutine.dataset.editIndex = index;
+//     }
+//   }
+//   targetRegisterWorkoutRoutine.dataset.mode = mode;
+//   targetRegisterWorkoutRoutine.style.display = display;
+// };
 
 // const getWorkoutRountineListDom = (workoutRoutineList = []) => {
 //   const template = workoutRoutineList
