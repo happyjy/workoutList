@@ -12,15 +12,28 @@ body {
 input[type='text'] {
   /* width: 100%; */
   padding: 5px 10px;
-  margin: 8px 0;
 }
+
+/* input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+} */
 
 .icon {
   height: 12px;
   width: 12px;
+  cursor: pointer;
 }
 
-.w80 {
+.highlight {
+  background-color: #fff2ac;
+  background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+}
+
+/* .w80 {
   width: 80px;
 }
 .w90 {
@@ -28,7 +41,7 @@ input[type='text'] {
 }
 .w100 {
   width: 100px;
-}
+} */
 
 body {
   /* font-family: "PT Serif", serif; */
@@ -41,13 +54,14 @@ body {
   align-items: center;
 }
 
-.workoutRegistContinaer {
+.workoutRegistContainer {
   display: flex;
   flex-direction: column;
   padding: 10px;
   border-radius: 4px;
-  border: 1px black solid;
   height: 60vh;
+  min-width: 600px;
+  border: 1px black solid;
 }
 
 /* 매일 운동 루틴 */
@@ -111,9 +125,8 @@ body {
   width: 100%;
   padding: 10px;
   border: 1px black solid;
-
   height: calc(60vh - 125px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .registWorkOutRoutineContainer {
   display: none;
@@ -130,6 +143,9 @@ body {
   justify-items: center;
   align-items: center;
   margin-bottom: 5px;
+}
+.workoutRoutineTitle {
+  cursor: pointer;
 }
 
 /*  */
@@ -187,42 +203,44 @@ body {
   align-items: center;
 }
 
-.workoutListContainer {
+.workoutListContentsContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-.workoutListNestedContainer {
+.workoutListNestedContentsContainer {
   flex: 6;
   align-items: stretch;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid black;
 }
-.workoutList {
+.workoutListContainer {
   display: flex;
   flex-direction: column;
 }
-.workoutList:last-child {
-  /* border: 1px solid black; */
+.workoutListNestedContainer {
+  /* border: red 1px solid; */
 }
-.workoutListContentsContainer {
-}
+/* .workoutList:last-child { */
+/* border: 1px solid black; */
+/* } */
 .workout {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 7px;
 }
-.workout:last-child {
-  /* margin-bottom: 0px !important;
-  border: 1px solid saddlebrown; */
-}
+/* .workout:last-child {
+  margin-bottom: 0px !important;
+  border: 1px solid saddlebrown;
+} */
 
 /* 운동추가 */
 .registWorkOutContainer {
-  display: flex;
+  display: none;
+  /* display: flex; */
   flex-direction: column;
 }
 .registWorkOutHeader {

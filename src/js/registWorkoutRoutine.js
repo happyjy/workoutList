@@ -1,28 +1,31 @@
 import {
+  getWorkoutRoutineList,
+  renderWorkoutList,
+  clearWokrout,
+} from './utils';
+import {
   getWorkoutRountineListDom,
   appendWorkoutRountine,
   toggleRegisterWorkoutRoutineInput,
 } from './common.js';
-import { workoutRoutineList, setWorkoutRoutineList } from './dummyData.js';
+import { workoutRoutineList, setWorkoutRoutineList } from './dummyData';
 
-console.log(
-  '### registerWorkoutRoutine module > workoutRoutineList',
-  workoutRoutineList,
-);
+console.log('### registerWorkoutRoutine module > workoutRoutineList');
+// let workoutRoutineList = JSON.parse(
+//   localStorage.getItem('workoutRoutineListDummyData'),
+// );
 
 const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutine">
-<span data-index="{{index}}" class="workoutRoutineTtitle">{{title}}</span>
+<span id="workoutRoutineType" data-index="{{index}}" class="workoutRoutineTitle">{{title}}</span>
 <div data-index="{{index}}" class="workoutRoutineButtonContainer">
   <span data-index="{{index}}" class="workoutRoutineEditBtn">
-    <img data-index="{{index}}" id="edit" class="icon" src="./img/editIcon.png" />
+    <img data-index="{{index}}" id="workoutRoutineEdit" class="icon" src="./img/editIcon.png" />
   </span>
   <span data-index="{{index}}" class="workoutRoutineDeleteBtn">
-    <img data-index="{{index}}" id="delete" class="icon" src="./img/deleteIcon.png" />
+    <img data-index="{{index}}" id="workoutRoutineDelete" class="icon" src="./img/deleteIcon.png" />
   </span>
 </div>
 </div>`;
-
-// const div = document.createElement('div').appendChild(templateDomList);
 
 // 새 운동 루틴 기능
 // 새 운동 루틴 버튼
@@ -35,71 +38,57 @@ const targetRegisterWorkoutRoutineInputDom = document.getElementById(
   'targetRegisterWorkoutRoutineInput',
 );
 
-// 새 운동 루틴 추가 컨테이너
+// 새 운동 루틴 title
+// const workoutRoutineTypeDom = document.getElementById('workoutRoutineType');
+
+// 새 운동 루틴 추가 컨테이너(edit, delete 컨테이너)
 const targetWorkoutRoutineListContainerDom = document.getElementById(
   'targetWorkoutRoutineListContainer',
 );
 
-// 운동 루틴 목록 List dummy data setting start
-// let workoutRoutineList = [];
-// const dummyData = window;
-// dummyData.workoutRoutineList = [];
+// 새 운동 루틴 버튼
+const registerWorkoutRoutine = document.getElementById(
+  'registerWorkoutRoutine',
+);
 
-// //reg date 임의 등록
-// var date = new Date();
-// for (let i = 0; i < 20; i++) {
-//   dummyData.workoutRoutineList.push({
-//     index: `${i}`,
-//     title: `운동루틴${i}`,
-//     regDate: date.setSeconds(i),
-//     updateDate: date.setSeconds(i),
-//   });
-// }
-
-//최근것부터 보여주도록
-workoutRoutineList.sort((a, b) => b.regDate++ - a.regDate++);
-
-// 운동 루틴 리스트 dom 생성 / append
-const templateDomList = getWorkoutRountineListDom(workoutRoutineList);
+// #init 운동 루틴 리스트(dom 생성 / append)
+// seesion workoutRoutineList 이용
+const seessionDataWorkoutRoutineList = getWorkoutRoutineList();
+// 최근것부터 보여주도록
+seessionDataWorkoutRoutineList.sort((a, b) => b.regDate++ - a.regDate++);
+const templateDomList = getWorkoutRountineListDom(
+  seessionDataWorkoutRoutineList,
+);
 appendWorkoutRountine(templateDomList);
 
-// const template = workoutRoutineList
-//   .map((v) =>
-//     workoutRoutineTemplate
-//       .replace(/\{\{index\}\}/g, v.index)
-//       .replace('{{title}}', v.title),
-//   )
-//   .join('');
+document.addEventListener('click', (e) => {
+  console.log('### document.addEventListener => click', e);
 
-// const templateDomList = new DOMParser().parseFromString(template, 'text/html')
-//   .body.childNodes;
+  if (e.target === document.getElementsByTagName('body')[0]) {
+    console.log('### ! workoutRoutineType');
+    clearWokrout();
+  }
+  // switch (e.target.id) {
+  //   case 'workoutRoutineType':
+  //     debugger;
+  //     console.log('### 새 운동 루틴 1.선택');
+  //     break;
+  //   default:
+  //     console.log('### ! workoutRoutineType');
+  //     clearWokrout();
+  //     break;
+  // }
+  //[]운동 루틴 선택하지 않은 클릭시 [운동 추가], [삭제]버튼 비활성화 , 전체 시간 표시 사라짐.
+});
 
-// # notice
-// - copy 하지 않으면 appendChild로 추가할때 templateDomList 배열에서 하나씩 제거 됨
-// const copy = [...templateDomList];
-// copy.forEach((node) => {
-//   console.log(node.firstElementChild.dataset);
-//   targetWorkoutRoutineListContainer.appendChild(node);
+// document.addEventListener('keypress', (e) => {
+//   console.log('### document.kepress: ', e.which);
+//   if (e.which == 27) {
+//     // Close my modal window
+//   }
 // });
 
-// 운동 루틴 목록 List dummy data setting end
-
-// const copy = [...templateDomList];
-// for (let i = 0; i < copy.length; i++) {
-//   targetWorkoutRoutineListContainer.appendChild(copy[i]);
-// }
-
-document.addEventListener('click', (e) => {
-  // console.log('123', e);
-});
-
-document.addEventListener('keypress', (e) => {
-  console.log('### document.kepress: ', e.which);
-  if (e.which == 27) {
-    // Close my modal window
-  }
-});
-
+//[]refactoring
 document.onkeydown = (e) => {
   console.log('### document.onkeydown ', e.which);
 
@@ -119,156 +108,169 @@ document.onkeydown = (e) => {
 };
 
 // 새 운동 루틴 버튼
-document
-  .getElementById('registerWorkoutRoutine')
-  .addEventListener('click', (e) => {
-    console.log('### 새 운동 루틴 버튼');
-    // toggle 새 운동 루틴 추가 input box
-    let display = 'block';
-    toggleRegisterWorkoutRoutineInput('new');
-    // if (targetRegisterWorkoutRoutine.style.display === 'block') {
-    //   display = 'none';
-    // }
-    // targetRegisterWorkoutRoutine.style.display = display;
+registerWorkoutRoutine.addEventListener('click', (e) => {
+  console.log('### 새 운동 루틴 버튼');
+  // toggle 새 운동 루틴 추가 input box
+  let display = 'block';
+  toggleRegisterWorkoutRoutineInput('new');
+  // if (targetRegisterWorkoutRoutine.style.display === 'block') {
+  //   display = 'none';
+  // }
+  // targetRegisterWorkoutRoutine.style.display = display;
 
-    //새 운동 루틴 버튼 추가시 자동으로 focus
-    targetRegisterWorkoutRoutineInputDom.focus();
+  //새 운동 루틴 버튼 추가시 자동으로 focus
+  targetRegisterWorkoutRoutineInputDom.focus();
 
-    //[]TODO 가로 길이 늘어남
-  });
+  //[]TODO 가로 길이 늘어남
+});
 
 // 새 운동 루틴 input
-document
-  .getElementById('targetRegisterWorkoutRoutineInput')
-  .addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      console.log('### 새 운동 루틴 추가 enter');
-      //운동루틴 목록 최상단에 노출
-      //TODO data-set list index 추가
-      const inputTitle = e.target.value;
+targetRegisterWorkoutRoutineInputDom.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    console.log('### 새 운동 루틴 추가 enter');
+    //운동루틴 목록 최상단에 노출
+    //TODO data-set list index 추가
+    const inputTitle = e.target.value;
 
-      switch (targetRegisterWorkoutRoutineDom.dataset.mode) {
-        case 'new':
-          const replaceWorkoutRoutineTemplate = workoutRoutineTemplate
-            .replace(/\{\{index\}\}/g, `${workoutRoutineList.length + 1}`)
-            .replace('{{title}}', inputTitle);
+    switch (targetRegisterWorkoutRoutineDom.dataset.mode) {
+      case 'new':
+        const replaceWorkoutRoutineTemplate = workoutRoutineTemplate
+          .replace(/\{\{index\}\}/g, `${workoutRoutineList.length + 1}`)
+          .replace('{{title}}', inputTitle);
 
-          const templateDom = new DOMParser().parseFromString(
-            replaceWorkoutRoutineTemplate,
-            'text/html',
-          ).body.firstChild;
+        const templateDom = new DOMParser().parseFromString(
+          replaceWorkoutRoutineTemplate,
+          'text/html',
+        ).body.firstChild;
 
-          targetWorkoutRoutineListContainerDom.prepend(templateDom);
+        targetWorkoutRoutineListContainerDom.prepend(templateDom);
 
-          // workoutRoutineList에 push
-          workoutRoutineList.push({
-            index: `${workoutRoutineList.length + 1}`,
-            title: inputTitle,
-            regDate: new Date(),
-            updateDate: '',
-          });
-          break;
-        case 'edit':
-          debugger;
-          // update workoutRoutineList
-          const updateWorkoutRoutineList = workoutRoutineList.map((v) => {
-            if (v.index === targetRegisterWorkoutRoutineDom.dataset.editIndex) {
-              var date = new Date();
-              v.title = inputTitle;
-              v.regDate = date++;
-            }
-            return v;
-          });
-          setWorkoutRoutineList(updateWorkoutRoutineList);
+        // workoutRoutineList에 push
+        workoutRoutineList.push({
+          index: `${workoutRoutineList.length + 1}`,
+          title: inputTitle,
+          regDate: new Date(),
+          updateDate: '',
+        });
+        break;
+      case 'edit':
+        debugger;
+        // update workoutRoutineList
+        const updateWorkoutRoutineList = workoutRoutineList.map((v) => {
+          if (v.index === targetRegisterWorkoutRoutineDom.dataset.editIndex) {
+            var date = new Date();
+            v.title = inputTitle;
+            v.regDate = date++;
+          }
+          return v;
+        });
+        setWorkoutRoutineList(updateWorkoutRoutineList);
 
-          // title update 방법 1,2
+        // title update 방법 1,2
 
-          // title update 방법 1: 업데이트한 dummydata로 운동 루틴 컨테이너 다 지고 다시 그리기
-          // update 새 운동 루틴 추가 컨테이너 with workoutRoutineList;
-          targetWorkoutRoutineListContainerDom.innerHTML = '';
-          const templateDomList = getWorkoutRountineListDom(workoutRoutineList);
-          appendWorkoutRountine(templateDomList);
+        // title update 방법 1: 업데이트한 dummydata로 운동 루틴 컨테이너 다 지고 다시 그리기
+        // update 새 운동 루틴 추가 컨테이너 with workoutRoutineList;
+        targetWorkoutRoutineListContainerDom.innerHTML = '';
+        const templateDomList = getWorkoutRountineListDom(workoutRoutineList);
+        appendWorkoutRountine(templateDomList);
 
-          // title update 방법 2: 수정한 dom 접근 text 직접 update
-          // let i = 0;
-          // for (i; i < targetWorkoutRoutineListContainer.children.length; i++) {
-          //   if (
-          //     targetWorkoutRoutineListContainer.children[i].dataset.index ===
-          //     targetRegisterWorkoutRoutine.dataset.editIndex
-          //   ) {
-          //     targetWorkoutRoutineListContainer.children[
-          //       i
-          //     ].firstElementChild.textContent = inputTitle;
-          //   }
-          // }
-          break;
+        // title update 방법 2: 수정한 dom 접근 text 직접 update
+        // let i = 0;
+        // for (i; i < targetWorkoutRoutineListContainer.children.length; i++) {
+        //   if (
+        //     targetWorkoutRoutineListContainer.children[i].dataset.index ===
+        //     targetRegisterWorkoutRoutine.dataset.editIndex
+        //   ) {
+        //     targetWorkoutRoutineListContainer.children[
+        //       i
+        //     ].firstElementChild.textContent = inputTitle;
+        //   }
+        // }
+        break;
 
-        // default:
-        //   break;
+      // default:
+      //   break;
+    }
+
+    // debugger;
+
+    // 초기화
+    e.target.value = '';
+
+    // [x]TODO 입력부 제거
+    // toogle 새 운동 루틴 추가
+    toggleRegisterWorkoutRoutineInput();
+  }
+
+  //[]TODO ESC 이벤트시 제거
+  if (e.which == 27) {
+    console.log('### ESC');
+    // Close my modal window
+  }
+});
+
+// 새 운동 루틴 1.선택, 2.edit, 3.delete 버튼
+targetWorkoutRoutineListContainerDom.addEventListener('click', (e) => {
+  console.log('### 새 운동 루틴 1.선택, 2.edit, 3.delete 버튼');
+
+  switch (e.target.id) {
+    case 'workoutRoutineType':
+      console.log('### 새 운동 루틴 1.선택');
+      //[x] render workout list
+      renderWorkoutList(e.target.dataset.index);
+
+      //[]refactoring
+      //[x]hightlight
+      let i = 0;
+      for (i; i < targetWorkoutRoutineListContainerDom.childElementCount; i++) {
+        let childDom = targetWorkoutRoutineListContainerDom.children[i];
+        childDom.style['background-color'] = '';
+        childDom.style['background-image'] = '';
       }
 
-      // debugger;
+      e.target.parentElement.style['background-color'] = '#fff2ac';
+      e.target.parentElement.style['background-image'] =
+        'linear-gradient(to right, #ffe359 0%, #fff2ac 100%)';
 
-      // 초기화
-      e.target.value = '';
+      break;
+    case 'workoutRoutineEdit':
+      console.log('### 새 운동 루틴 2.edit');
+      //[X]TODO 입력부 show
+      if (targetRegisterWorkoutRoutineDom.style.display !== 'block') {
+        toggleRegisterWorkoutRoutineInput('edit', e.target.dataset.index);
+      }
 
-      // [x]TODO 입력부 제거
-      // toogle 새 운동 루틴 추가
-      toggleRegisterWorkoutRoutineInput();
-    }
+      //[X]TODO 입력부 input에 클릭한 title 입력, 입력부로 focus 이동
+      const clickedRoutine = workoutRoutineList.filter(
+        (v) => v.index === e.target.dataset.index,
+      )[0];
+      targetRegisterWorkoutRoutineInputDom.value = clickedRoutine.title;
+      targetRegisterWorkoutRoutineInputDom.focus();
+      //[X]TODO 입력부에 포커스, enter로 수정모드 완료(새 운동 루틴 이름 변경)
 
-    //[]TODO ESC 이벤트시 제거
-    if (e.which == 27) {
-      console.log('### ESC');
-      // Close my modal window
-    }
-  });
+      //[]TODO ESC누르면 최소(입력부 제거)
 
-// 새 운동 루틴 edit, delete
-document
-  .getElementById('targetWorkoutRoutineListContainer')
-  .addEventListener('click', (e) => {
-    console.log('### 운동 루틴 edit, delete');
+      break;
+    case 'workoutRoutineDelete':
+      console.log('### 새 운동 루틴 3.delete');
+      const result = confirm('삭제하시겠습니까?');
+      if (result) {
+        // dummyData에서 삭제할 것 제외한 데이터 다시 render
+        const willNotDeleteOne = workoutRoutineList.filter(
+          (v) => v.index !== e.target.dataset.index,
+        );
+        targetWorkoutRoutineListContainerDom.innerHTML = '';
 
-    switch (e.target.id) {
-      case 'edit':
-        console.log('### 운동 루틴 edit');
-        //[X]TODO 입력부 show
-        if (targetRegisterWorkoutRoutineDom.style.display !== 'block') {
-          toggleRegisterWorkoutRoutineInput('edit', e.target.dataset.index);
-        }
+        const templateDomList = getWorkoutRountineListDom(willNotDeleteOne);
+        appendWorkoutRountine(templateDomList);
+        setWorkoutRoutineList(willNotDeleteOne);
+      }
+      break;
 
-        //[X]TODO 입력부 input에 클릭한 title 입력, 입력부로 focus 이동
-        const clickedRoutine = workoutRoutineList.filter(
-          (v) => v.index === e.target.dataset.index,
-        )[0];
-        targetRegisterWorkoutRoutineInputDom.value = clickedRoutine.title;
-        targetRegisterWorkoutRoutineInputDom.focus();
-        //[X]TODO 입력부에 포커스, enter로 수정모드 완료(운동 루틴 이름 변경)
-
-        //[]TODO ESC누르면 최소(입력부 제거)
-
-        break;
-      case 'delete':
-        console.log('### 운동 루틴 delete');
-        const result = confirm('삭제하시겠습니까?');
-        if (result) {
-          // dummyData에서 삭제할 것 제외한 데이터 다시 render
-          const willNotDeleteOne = workoutRoutineList.filter(
-            (v) => v.index !== e.target.dataset.index,
-          );
-          targetWorkoutRoutineListContainerDom.innerHTML = '';
-
-          const templateDomList = getWorkoutRountineListDom(willNotDeleteOne);
-          appendWorkoutRountine(templateDomList);
-          setWorkoutRoutineList(willNotDeleteOne);
-        }
-        break;
-
-      default:
-        break;
-    }
-  });
+    default:
+      break;
+  }
+});
 
 // common function
 // 새 운동 루틴 추가 input box

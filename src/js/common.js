@@ -1,44 +1,57 @@
 console.log('### common');
 
 /**
- * 1. 새 운동 루틴
+ * 새 운동 루틴 운동 추가
  */
 const workoutRoutineTemplate = `<div data-index="{{index}}" class="workoutRoutine">
-<span data-index="{{index}}" class="workoutRoutineTtitle">{{title}}</span>
+<span id="workoutRoutineType" data-index="{{index}}" class="workoutRoutineTitle">{{title}}</span>
 <div data-index="{{index}}" class="workoutRoutineButtonContainer">
   <span data-index="{{index}}" class="workoutRoutineEditBtn">
-    <img data-index="{{index}}" id="edit" class="icon" src="./img/editIcon.png" />
+    <img data-index="{{index}}" id="workoutRoutineEdit" class="icon" src="./img/editIcon.png" />
   </span>
   <span data-index="{{index}}" class="workoutRoutineDeleteBtn">
-    <img data-index="{{index}}" id="delete" class="icon" src="./img/deleteIcon.png" />
+    <img data-index="{{index}}" id="workoutRoutineDelete" class="icon" src="./img/deleteIcon.png" />
   </span>
 </div>
 </div>`;
 
+// 새 운동 루틴 기능
+// 새 운동 루틴 버튼
+const targetRegisterWorkoutRoutineDom = document.getElementById(
+  'targetRegisterWorkoutRoutine',
+);
+
+// 새 운동 루틴 추가 input box
+const targetRegisterWorkoutRoutineInputDom = document.getElementById(
+  'targetRegisterWorkoutRoutineInput',
+);
+
 //새 운동 루틴 컨테이너
-const targetWorkoutRoutineListContainer = document.getElementById(
+const targetWorkoutRoutineListContainerDom = document.getElementById(
   'targetWorkoutRoutineListContainer',
 );
 
+// toogle rigister workout routin input
 export function toggleRegisterWorkoutRoutineInput(mode = '', index = '') {
   let display = '';
 
-  if (targetRegisterWorkoutRoutine.style.display === 'block') {
+  if (targetRegisterWorkoutRoutineDom.style.display === 'block') {
     display = 'none';
     mode = '';
-    targetRegisterWorkoutRoutineInput.value = '';
+    targetRegisterWorkoutRoutineInputDom.value = '';
   } else {
     display = 'block';
     mode = mode;
 
     if (mode === 'edit') {
-      targetRegisterWorkoutRoutine.dataset.editIndex = index;
+      targetRegisterWorkoutRoutineDom.dataset.editIndex = index;
     }
   }
-  targetRegisterWorkoutRoutine.dataset.mode = mode;
-  targetRegisterWorkoutRoutine.style.display = display;
+  targetRegisterWorkoutRoutineDom.dataset.mode = mode;
+  targetRegisterWorkoutRoutineDom.style.display = display;
 }
 
+// get workout routine list dom
 export function getWorkoutRountineListDom(workoutRoutineListDummyData = []) {
   console.log('### getWorkoutRountineListDom');
   const template = workoutRoutineListDummyData
@@ -56,10 +69,6 @@ export function appendWorkoutRountine(templateDomList = []) {
   console.log('### appendWorkoutRountine');
   const copy = [...templateDomList];
   copy.forEach((node) => {
-    targetWorkoutRoutineListContainer.appendChild(node);
+    targetWorkoutRoutineListContainerDom.appendChild(node);
   });
 }
-
-/**
- * 운동 추가
- */
