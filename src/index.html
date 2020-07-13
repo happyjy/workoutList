@@ -9,6 +9,7 @@
 
 <body>
   <div id="app"></div>
+
   <div class="workoutRegistContainer">
     <!-- 상단헤더 -->
     <div class="workoutRegistHeader"> 매일 운동 루틴 </div>
@@ -58,19 +59,21 @@
               </div>
               <!-- 운동추가 -->
               <div id="registWorkOutContainer" class="registWorkOutContainer">
-                <div class="registWorkOutHeader">
-                  <div class="registWorkOutHeaderLeft">
-                    <span>이름</span>
-                    <input id='workoutTitle' type="text" />
-                  </div>
+                <form action="/" method="">
+                  <div class="registWorkOutHeader">
+                    <div class="registWorkOutHeaderLeft">
+                      <span>이름</span>
+                      <input id='workoutTitle' class="workoutInput w110" type="text" required />
+                    </div>
 
-                  <div class="registWorkOutHeaderRight">
-                    <input id="workoutSecond" type="number" />
-                    <span>초</span>
-                    <input id="workoutTimes" type="number" />
-                    <span>세트</span>
+                    <div class="registWorkOutHeaderRight">
+                      <input id="workoutSecond" class="workoutInput" type="number" />
+                      <span>초</span>
+                      <input id="workoutTimes" class="workoutInput" type="number" />
+                      <span>세트</span>
+                    </div>
                   </div>
-                </div>
+                </form>
                 <div class="registWorkOutFooter">
                   <div id='saveBtnRegistWorkOutBtn' class="saveBtnRegistWorkOutBtn">저장</div>
                   <div id='cancelBtnRegistWorkOutBtn' class="cancelBtnRegistWorkOutBtn">취소</div>

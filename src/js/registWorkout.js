@@ -3,6 +3,7 @@ import { workoutList, setWorkoutList } from './dummyData';
 import {
   renderWorkoutList,
   toggleRegisterWorkoutContainer,
+  saveWorkoutProcess,
 } from './registWorkoutProcess';
 import { clearWorkoutInput } from './utils';
 
@@ -31,6 +32,11 @@ const registWorkoutContainerDom = document.getElementById(
   'registWorkOutContainer',
 );
 
+// 운동 추가 input box(운동이름, 초, 세트수)
+const workoutTitleInputDom = document.getElementById('workoutTitle');
+const workoutSecondInputDom = document.getElementById('workoutSecond');
+const workoutTimesInputDom = document.getElementById('workoutTimes');
+
 // 운동 저장
 const saveBtnRegistWorkOutBtnDom = document.getElementById(
   'saveBtnRegistWorkOutBtn',
@@ -39,11 +45,6 @@ const saveBtnRegistWorkOutBtnDom = document.getElementById(
 const cancelBtnRegistWorkOutBtnDom = document.getElementById(
   'cancelBtnRegistWorkOutBtn',
 );
-
-// 운동 추가 input box(운동이름, 초, 세트수)
-const workoutTitleInputDom = document.getElementById('workoutTitle');
-const workoutSecondInputDom = document.getElementById('workoutSecond');
-const workoutTimesInputDom = document.getElementById('workoutTimes');
 
 //[x] 툴바 > 전체시간(m분, n초)
 //[x] 툴바 > 삭제 버튼 기능
@@ -98,72 +99,45 @@ workoutdeleteBtnDom.addEventListener('click', (e) => {
   renderWorkoutList(workoutRoutineIndex);
 });
 
-// 운동 저장 by click
-saveBtnRegistWorkOutBtnDom.addEventListener('click', (e) => {
-  console.log('### saveBtnRegistWorkOutBtnDom');
-});
-
 // 운동 저장 by enter
 const enterEventCallbackFunction = (e) => {
   if (e.key === 'Enter') {
     console.log('### 운동 추가, 수정 enter');
-    switch (registWorkoutContainerDom.dataset.mode) {
-      case 'new':
-        //운동 추가
-        // figure out routineIndex;
-        const workoutRoutineIndex =
-          targetWorkoutListContainerDom.dataset.routineIndex;
-
-        const filterWorkoutList = workoutList.filter(
-          (v) => v.workoutRoutineIndex === workoutRoutineIndex,
-        );
-
-        // workoutList에서 index, workoutIndex, workoutRoutineIndex하고 push
-        let maxIndex = workoutList.reduce((acc, cur) => {
-          return acc.index > cur.index ? acc : cur;
-        }).index;
-
-        let maxWorkoutIndex = filterWorkoutList.reduce((acc, cur) => {
-          return acc.workoutIndex > cur.workoutIndex ? acc : cur;
-        }).workoutIndex;
-
-        // update workout dummy Data
-        // reRender workout list
-        let date = new Date();
-        console.log(workoutList);
-        workoutList.push({
-          index: parseInt(maxIndex) + 1 + '',
-          workoutIndex: parseInt(maxWorkoutIndex) + 1 + '',
-          workoutRoutineIndex: workoutRoutineIndex,
-          title: workoutTitleInputDom.value,
-          second: workoutSecondInputDom.value,
-          times: workoutTimesInputDom.value,
-          regDate: date++,
-          updateDate: date++,
-        });
-        setWorkoutList(workoutList);
-        renderWorkoutList(workoutRoutineIndex); //routineIndex
-
-        clearWorkoutInput();
-        workoutTitleInputDom.focus();
-        break;
-      case 'edit':
-        //운동 수정
-        //start
-        break;
-
-      default:
-        break;
-    }
+    saveWorkoutProcess();
   }
 };
+
 workoutTitleInputDom.addEventListener('keypress', enterEventCallbackFunction);
 workoutSecondInputDom.addEventListener('keypress', enterEventCallbackFunction);
 workoutTimesInputDom.addEventListener('keypress', enterEventCallbackFunction);
 
+// focusout event(validation)
+const focusoutCallbackFunction = (e) => {
+  const validation = 'validation';
+  const classListStr = [...e.target.classList];
+  if (classListStr.find((v) => v === validation)) {
+    const classList = classListStr.filter((v) => v !== validation).join(' ');
+    e.target.classList = classList;
+  }
+};
+workoutTitleInputDom.addEventListener('focusout', focusoutCallbackFunction);
+workoutSecondInputDom.addEventListener('focusout', focusoutCallbackFunction);
+workoutTimesInputDom.addEventListener('focusout', focusoutCallbackFunction);
+workoutTitleInputDom.addEventListener('keydown', focusoutCallbackFunction);
+workoutSecondInputDom.addEventListener('keydown', focusoutCallbackFunction);
+workoutTimesInputDom.addEventListener('keydown', focusoutCallbackFunction);
+
+// 운동 저장 by click
+saveBtnRegistWorkOutBtnDom.addEventListener('click', (e) => {
+  console.log('### saveBtnRegistWorkOutBtnDom');
+  saveWorkoutProcess();
+});
+
 // 운동 취소
 cancelBtnRegistWorkOutBtnDom.addEventListener('click', (e) => {
   console.log('### cancelBtnRegistWorkOutBtnDom');
+  toggleRegisterWorkoutContainer();
+  clearWorkoutInput();
 });
 
 // 운동 수정
@@ -172,10 +146,13 @@ targetWorkoutListNestedContentsContainer.addEventListener('click', (e) => {
 
   switch (e.target.id) {
     case 'workoutEdit':
+      //set workout index into registWorkoutContainerDom
+      registWorkoutContainerDom.dataset.index = e.target.dataset.index;
+
       // open 운동 입력부
-      const workoutIndex =
-        targetWorkoutListNestedContentsContainer.dataset.workoutIndex;
-      toggleRegisterWorkoutContainer('edit', workoutIndex);
+      const workoutRoutineIndex =
+        targetWorkoutListNestedContentsContainer.dataset.workoutRoutineIndex;
+      toggleRegisterWorkoutContainer('edit', workoutRoutineIndex);
 
       const filterWorkoutList = workoutList.filter(
         (v) => v.index === e.target.dataset.index,

@@ -60,13 +60,11 @@ const setWorkoutRoutineList = (data) => {
   // dummyData.workoutRoutineListDummyData = data;
   workoutRoutineList = data;
   setLocalStorage('workoutRoutineListDummyData', data);
-  console.log('====> dummy data > workoutRoutineList: ', workoutRoutineList);
 };
 const setWorkoutList = (data) => {
   // dummyData.workoutListDummyData = data;
   workoutList = data;
   setLocalStorage('workoutListDummyData', data);
-  console.log('====> dummy data > workoutList: ', workoutList);
 };
 
 // update data workout routine, workout

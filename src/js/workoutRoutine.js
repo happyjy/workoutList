@@ -1,5 +1,5 @@
 class workoutRoutine {
-  constructor(index, title) {
-    return { index, title };
-  }
+	constructor(index, title) {
+		return { index, title };
+	}
 }

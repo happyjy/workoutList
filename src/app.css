@@ -33,15 +33,22 @@ input[type='text'] {
   background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
 }
 
-/* .w80 {
-  width: 80px;
+.validation {
+  border: red 1px solid;
+}
+
+.w80 {
+  width: 80px !important;
 }
 .w90 {
-  width: 90px;
+  width: 90px !important;
 }
 .w100 {
-  width: 100px;
-} */
+  width: 100px !important;
+}
+.w110 {
+  width: 110px !important;
+}
 
 body {
   /* font-family: "PT Serif", serif; */
@@ -263,11 +270,12 @@ body {
   display: inline-flex;
   align-items: center;
   /* border: 1px solid aqua; */
-  margin: 5px;
+  /* margin: 5px; */
 }
 .registWorkOutHeaderLeft > input,
 .registWorkOutHeaderRight > input {
-  width: 70px;
+  width: 50px;
+  margin: 5px;
 }
 .registWorkOutHeaderRight {
   display: flex;

@@ -63,3 +63,34 @@ export function clearWorkoutInput() {
 
 //   return [state];
 // }
+
+/**
+ * workout
+ */
+
+//validation workout
+export function validation(HTMLCollection) {
+  let result = true;
+  let resultObject = {};
+
+  // const workoutInputHTMLCollection = document.getElementsByClassName(
+  //   'workoutInput',
+  // );
+  const workoutInputList = [...HTMLCollection];
+
+  let workoutInputDom;
+  while ((workoutInputDom = workoutInputList.pop())) {
+    //required
+    if (workoutInputDom.value.trim().length === 0) {
+      result = false;
+      workoutInputDom.className += ' validation';
+      resultObject = {
+        type: 'required',
+        message: '입력하세요.',
+        id: workoutInputDom.id,
+      };
+    }
+  }
+
+  return { result, resultObject };
+}

@@ -72,23 +72,6 @@ document.addEventListener('click', (e) => {
 // });
 
 //[]refactoring
-document.onkeydown = (e) => {
-	console.log('### document.onkeydown ');
-
-	e = e || window.event;
-	var isEscape = false;
-	if ('key' in e) {
-		isEscape = e.key === 'Escape' || e.key === 'Esc';
-	} else {
-		isEscape = e.keyCode === 27;
-	}
-	if (isEscape) {
-		if (document.activeElement === e.target) {
-			console.log('새운동루틴 input에 active있어서 input 제거');
-			toggleRegisterWorkoutRoutineInput();
-		}
-	}
-};
 
 // 새 운동 루틴 버튼
 registerWorkoutRoutine.addEventListener('click', (e) => {
@@ -183,12 +166,12 @@ targetWorkoutRoutineListContainerDom.addEventListener('click', (e) => {
 	switch (e.target.id) {
 		case 'workoutRoutineType':
 			console.log('### 새 운동 루틴 1.선택');
+			const workoutRoutineIndex = e.target.dataset.index;
 			//[x] render workout list
-			const workoutIndex = e.target.dataset.index;
-			renderWorkoutList(workoutIndex);
+			renderWorkoutList(workoutRoutineIndex);
 
 			// setting workout index 운동 등록 컨테이너
-			targetWorkoutListNestedContentsContainer.dataset.workoutIndex = workoutIndex;
+			targetWorkoutListNestedContentsContainer.dataset.workoutRoutineIndex = workoutRoutineIndex;
 
 			//[]refactoring
 			//[x]highlight

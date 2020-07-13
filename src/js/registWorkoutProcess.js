@@ -1,7 +1,9 @@
+import { clearWorkoutInput, validation } from './utils';
+import { workoutList, setWorkoutList } from './dummyData';
+
 /**
  *  workout
  */
-
 // render workout list
 const workoutTemplate = `
 <div data-index="{{index}}" data-workout-index="{{workoutIndex}}" data-routine-index="{{workoutRoutineIndex}}" class="workout">
@@ -141,13 +143,111 @@ export function toggleRegisterWorkoutContainer(mode = '', index = '') {
     workoutTitleInputDom.value = '';
     workoutSecondInputDom.value = '';
     workoutTimesInputDom.value = '';
+
+    registWorkoutContainerDom.dataset.mode = mode;
+    registWorkoutContainerDom.style.display = display;
   } else {
     display = 'block';
     mode = mode;
     if (mode === 'edit') {
       registWorkoutContainerDom.dataset.editIndex = index;
     }
+
+    registWorkoutContainerDom.dataset.mode = mode;
+    registWorkoutContainerDom.style.display = display;
+
+    // init input 운동시간 30초, 세트 1회
+    if (mode === 'new') {
+      workoutTitleInputDom.focus();
+      //refactoring: static variables로 변경하기
+      workoutSecondInputDom.value = 30;
+      workoutTimesInputDom.value = 1;
+    }
   }
-  registWorkoutContainerDom.dataset.mode = mode;
-  registWorkoutContainerDom.style.display = display;
+}
+
+export function saveWorkoutProcess() {
+  //validation
+  let resultValidation;
+  const workoutInputHTMLCollection = document.getElementsByClassName(
+    'workoutInput',
+  );
+  debugger;
+  let { result, resultObject } = validation(workoutInputHTMLCollection);
+  if (!result) {
+    alert(resultObject.message);
+    return;
+  }
+
+  const workoutRoutineIndex =
+    targetWorkoutListContainerDom.dataset.routineIndex;
+  switch (registWorkoutContainerDom.dataset.mode) {
+    case 'new':
+      // 운동 신규 추가
+      //1. figure out routineIndex;
+      const filterWorkoutList = workoutList.filter(
+        (v) => v.workoutRoutineIndex === workoutRoutineIndex,
+      );
+
+      //2. get maxIndex, maxWorkoutIndex
+      let maxIndex = workoutList.reduce((acc, cur) => {
+        return parseInt(acc.index) > parseInt(cur.index) ? acc : cur;
+      }).index;
+
+      let maxWorkoutIndex = filterWorkoutList.reduce((acc, cur) => {
+        return parseInt(acc.workoutIndex) > parseInt(cur.workoutIndex)
+          ? acc
+          : cur;
+      }).workoutIndex;
+
+      //3. update workout dummy Data
+      let date = new Date();
+      console.log(workoutList);
+      workoutList.push({
+        index: parseInt(maxIndex) + 1 + '',
+        workoutIndex: parseInt(maxWorkoutIndex) + 1 + '',
+        workoutRoutineIndex: workoutRoutineIndex,
+        title: workoutTitleInputDom.value,
+        second: workoutSecondInputDom.value,
+        times: workoutTimesInputDom.value,
+        regDate: date++,
+        updateDate: date++,
+      });
+      setWorkoutList(workoutList);
+
+      //4. reRender workout list
+      renderWorkoutList(workoutRoutineIndex); //routineIndex
+
+      //5. remove registWorkoutContainerDom & clear inputbox
+      toggleRegisterWorkoutContainer();
+      clearWorkoutInput();
+      workoutTitleInputDom.focus();
+      break;
+    case 'edit':
+      //운동 수정
+      //1. get workout index
+      const indexOfworkout = registWorkoutContainerDom.dataset.index;
+
+      //2. update workout info
+      const newWorkoutList = workoutList.map((v) => {
+        if (v.index == indexOfworkout) {
+          v.title = workoutTitleInputDom.value;
+          v.second = workoutSecondInputDom.value;
+          v.times = workoutTimesInputDom.value;
+        }
+        return v;
+      });
+      setWorkoutList(newWorkoutList);
+
+      //3. render workout list by new workout info
+      renderWorkoutList(workoutRoutineIndex); //routineIndex
+
+      //4. remove registWorkoutContainerDom & clear inputbox
+      toggleRegisterWorkoutContainer();
+      clearWorkoutInput();
+      break;
+
+    default:
+      break;
+  }
 }
