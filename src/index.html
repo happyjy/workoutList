@@ -50,25 +50,11 @@
 
         <!-- 운동목록 리스트 컨테이너 -->
         <div class="workoutListContentsContainer">
-          <div class="workoutListNestedContentsContainer">
+          <div id="targetWorkoutListNestedContentsContainer" class="workoutListNestedContentsContainer">
             <div class="workoutListContainer">
               <!-- # update 되어야 할 부분 -->
               <!-- workout 목록 리스트-->
               <div id="targetWorkoutListContainer" class="workoutListNestedContainer">
-                <!-- <div data-index="{{index}}" class="workout">
-                  <span data-index="{{index}}" class="workoutTitle">스트레칭운동 60초 3세트</span>
-                  <span data-index="{{index}}" class="workoutIcon">
-                    <img data-index="{{index}}" id="workoutRoutineEdit" class="icon" src="./img/editIcon.png" />
-                  </span>
-                </div> -->
-                <!-- <div class="workout">
-                  <span class="workoutTitle">플랭크 60초 3세트</span>
-                  <span class="workoutIcon">Edit</span>
-                </div>
-                <div class="workout">
-                  <span class="workoutTitle">스쿼트 60초 3세트</span>
-                  <span class="workoutIcon">Edit</span>
-                </div> -->
               </div>
               <!-- 운동추가 -->
               <div id="registWorkOutContainer" class="registWorkOutContainer">
@@ -79,15 +65,15 @@
                   </div>
 
                   <div class="registWorkOutHeaderRight">
-                    <input id="workoutSecond" type="text" />
+                    <input id="workoutSecond" type="number" />
                     <span>초</span>
-                    <input id="workoutTimes" type="text" />
+                    <input id="workoutTimes" type="number" />
                     <span>세트</span>
                   </div>
                 </div>
                 <div class="registWorkOutFooter">
-                  <div class="saveBtnRegistWorkOutBtn">저장</div>
-                  <div class="cancelBtnRegistWorkOutBtn">취소</div>
+                  <div id='saveBtnRegistWorkOutBtn' class="saveBtnRegistWorkOutBtn">저장</div>
+                  <div id='cancelBtnRegistWorkOutBtn' class="cancelBtnRegistWorkOutBtn">취소</div>
                 </div>
               </div>
             </div>
