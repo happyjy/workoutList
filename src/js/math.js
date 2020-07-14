@@ -1,5 +1,5 @@
-export function sum(a,b){
-  console.log('### math: ', a, b)
+export function sum(a, b) {
+	console.log('### math: ', a, b);
 
-  return a+b;
+	return a + b;
 }
