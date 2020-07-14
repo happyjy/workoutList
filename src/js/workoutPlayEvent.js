@@ -2,7 +2,7 @@
 import { getWorkoutPlayData } from './dummyData';
 import { getWorkoutTotalTime } from './registWorkoutProcess';
 import { renderDomList, useState } from './utils';
-import { workoutMainPage } from './wokroutEvent';
+import { workoutMainPage } from './workoutEvent';
 
 let pauseFlag = false;
 let headerIntervalReturn;
@@ -127,9 +127,7 @@ export function setWorkoutPlayHeader() {
 			//step1.1 설정 세트 시간을 못 채운 경우
 			currentWorkoutTimeDom.innerText = secondCount; //한 세트의 진행시간
 		}
-	}, 300);
-
-	// return workoutPlayHeaderDom;
+	}, 10);
 }
 
 export function setWorkoutPlayToolbar() {
@@ -218,7 +216,7 @@ export function setWorkoutPlayToolbar() {
 			formatString = leftSecondCount.toString();
 			currentSecondDom.innerText = formatString.padStart(2, '0');
 		}
-	}, 300);
+	}, 10);
 }
 
 export function setWorkoutPlayList() {
@@ -275,17 +273,18 @@ export function workoutPlayRestart() {
 	pauseFlag = false;
 }
 export function workoutPlayStop() {
-	//clear setInterval
+	// clear setInterval
 	clearInterval(headerIntervalReturn);
 	clearInterval(toolbarIntervalReturn);
 
-	//move to main page
+	// move to main page
 	workoutMainPage();
 }
-//workoutPlayListUpdate
+// workoutPlayListUpdate
 function workoutPlayItemUpdate() {
-	//운동 리스트 컨테이너
+	// 운동 리스트 컨테이너
 	const targetWorkoutPlayListContainerDom = document.getElementById('targetWorkoutPlayListContainer');
+	const workoutPlayListDom = document.getElementById('workoutPlayList');
 
 	// highlight update
 	const children = [ ...targetWorkoutPlayListContainerDom.children ];
@@ -303,6 +302,9 @@ function workoutPlayItemUpdate() {
 			child.classList = newChildClassList.join(' ');
 
 			children[i + 1].classList += ' highlight';
+
+			workoutPlayListDom.scrollTop += child.offsetHeight;
+
 			return false;
 		}
 	}

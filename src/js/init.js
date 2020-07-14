@@ -1,11 +1,11 @@
-import { initWorkoutRoutine } from './registWorkoutRoutineProcess.js';
+import { initWorkoutRoutine } from './registWorkoutRoutineProcess';
 import {
 	registerWorkoutRoutine,
 	registerWorkoutRoutineInputDom,
 	workoutRoutineType,
 	workoutRoutineEdit,
 	workoutRoutineDelete
-} from './wokroutRoutinEvent';
+} from './workoutRoutinEvent';
 
 import {
 	showWorkoutInputNewMode,
@@ -16,7 +16,7 @@ import {
 	showWorkoutInputEditMode,
 	startWorkout,
 	workoutMainPage
-} from './wokroutEvent';
+} from './workoutEvent';
 
 import { workoutPlayPause, workoutPlayRestart, workoutPlayStop } from './workoutPlayEvent';
 

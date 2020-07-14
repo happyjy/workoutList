@@ -2,7 +2,7 @@ import { initWorkoutRoutine, toggleRegisterWorkoutRoutineInput } from './registW
 import { renderWorkoutList, toggleRegisterWorkoutContainer, saveWorkoutProcess } from './registWorkoutProcess';
 import { workoutRoutineList, workoutList, setWorkoutList, setWorkoutPlayData } from './dummyData';
 import { clearWorkoutInput } from './utils';
-import { wokroutRegisteTemplate } from './template';
+import { workoutRegisteTemplate } from './template';
 
 export function registerWorkoutRoutine(e) {
 	console.log('### 새 운동 루틴 버튼');
@@ -19,7 +19,8 @@ export function showWorkoutInputNewMode(e) {
 	// 운동 리스트 컨테이너
 	const targetWorkoutListContainerDom = document.getElementById('targetWorkoutListContainer');
 
-	if (targetWorkoutListContainerDom.childElementCount === 0) return;
+	debugger;
+	if (!targetWorkoutListContainerDom.dataset.routineIndex) return;
 	toggleRegisterWorkoutContainer('new');
 }
 
@@ -145,7 +146,7 @@ export function startWorkout(e) {
 
 export function workoutMainPage(e) {
 	const el = document.querySelector('#app');
-	el.innerHTML = wokroutRegisteTemplate;
+	el.innerHTML = workoutRegisteTemplate;
 	initWorkoutRoutine();
 }
 
@@ -183,7 +184,7 @@ export function showWorkoutPlay({ workoutPlayRoutine = {}, workoutPlayList = [] 
     <div id="workoutPlayToolbar" class="workoutPlayToolbar"></div>
 
     <!-- 운동실행화면 컨테이너 -->
-    <div class="workoutPlayList">
+    <div id="workoutPlayList" class="workoutPlayList">
       <!-- 운동실행화면 workout 목록 리스트-->
       <div id="targetWorkoutPlayListContainer" class="workoutPlayListContainer" data-routine-index="17">
       </div>

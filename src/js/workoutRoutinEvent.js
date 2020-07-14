@@ -7,7 +7,7 @@ import {
 	appendWorkoutRountine,
 	toggleRegisterWorkoutRoutineInput,
 	showRegisterWorkoutRoutineInput
-} from './registWorkoutRoutineProcess.js';
+} from './registWorkoutRoutineProcess';
 
 import { clearHighlight } from './utils';
 

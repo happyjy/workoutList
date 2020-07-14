@@ -1,4 +1,4 @@
-const wokroutRegisteTemplate = `<div class="workoutRegistContainer">
+const workoutRegisteTemplate = `<div class="workoutRegistContainer">
   <!-- 상단헤더 -->
   <div class="workoutRegistHeader"> 매일 운동 루틴 </div>
 
@@ -103,4 +103,4 @@ const workoutTemplate = `
 </div>
 `;
 
-export { wokroutRegisteTemplate, workoutRoutineTemplate, workoutTemplate };
+export { workoutRegisteTemplate, workoutRoutineTemplate, workoutTemplate };

@@ -82,11 +82,13 @@ export function clearWorkoutContainer() {
 	const workoutTimesInputDom = document.getElementById('workoutTimes');
 	// dom of 운동 입력부 컨테이너
 	const registWorkutContainerDom = document.getElementById('registWorkOutContainer');
+	const targetWorkoutListContainerDom = document.getElementById('targetWorkoutListContainer');
 
 	workoutTitleInputDom.value = '';
 	workoutSecondInputDom.value = '';
 	workoutTimesInputDom.value = '';
 	registWorkutContainerDom.style.display = 'none';
+	delete targetWorkoutListContainerDom.dataset.routineIndex;
 }
 export function clearWorkoutTotalTime() {
 	const targetTotalTimeDom = document.getElementById('targetTotalTime');
@@ -113,6 +115,7 @@ export function renderWorkoutList(workoutRoutineIndex = '') {
 
 export function toggleRegisterWorkoutContainer(mode = '', index = '') {
 	let display = '';
+
 	// 운동 입력부 컨테이너
 	const registWorkoutContainerDom = document.getElementById('registWorkOutContainer');
 	const workoutTitleInputDom = document.getElementById('workoutTitle');
@@ -157,10 +160,11 @@ export function toggleRegisterWorkoutContainer(mode = '', index = '') {
 			workoutSecondInputDom.value = 30;
 			workoutTimesInputDom.value = 1;
 		}
-	}
 
-	// move to scroll bottom
-	targetWorkoutListNestedContentsContainerDom.scrollTop = targetWorkoutListNestedContentsContainerDom.scrollHeight;
+		// move to scroll bottom
+		targetWorkoutListNestedContentsContainerDom.scrollTop =
+			targetWorkoutListNestedContentsContainerDom.scrollHeight;
+	}
 }
 
 export function saveWorkoutProcess() {
@@ -173,12 +177,18 @@ export function saveWorkoutProcess() {
 	const workoutTitleInputDom = document.getElementById('workoutTitle');
 	const workoutSecondInputDom = document.getElementById('workoutSecond');
 	const workoutTimesInputDom = document.getElementById('workoutTimes');
+	const targetWorkoutListNestedContentsContainerDom = document.getElementById(
+		'targetWorkoutListNestedContentsContainer'
+	);
 
 	let { result, resultObject } = validation(workoutInputHTMLCollection);
 	if (!result) {
 		alert(resultObject.message);
 		return;
 	}
+
+	// move to scroll top
+	targetWorkoutListNestedContentsContainerDom.scrollTop = 0;
 
 	const workoutRoutineIndex = targetWorkoutListContainerDom.dataset.routineIndex;
 	switch (registWorkoutContainerDom.dataset.mode) {
@@ -192,9 +202,12 @@ export function saveWorkoutProcess() {
 				return parseInt(acc.index) > parseInt(cur.index) ? acc : cur;
 			}).index;
 
-			let maxWorkoutIndex = filterWorkoutList.reduce((acc, cur) => {
-				return parseInt(acc.workoutIndex) > parseInt(cur.workoutIndex) ? acc : cur;
-			}).workoutIndex;
+			let maxWorkoutIndex =
+				filterWorkoutList.length > 0
+					? filterWorkoutList.reduce((acc, cur) => {
+							return parseInt(acc.workoutIndex) > parseInt(cur.workoutIndex) ? acc : cur;
+						}).workoutIndex
+					: 0;
 
 			//3. update workout dummy Data
 			let date = new Date();

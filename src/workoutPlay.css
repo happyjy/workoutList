@@ -31,10 +31,7 @@
 	background-color: #ffffff;
 }
 
-/*
-  운동 아이템
-  workout
-*/
+/* 운동 아이템 */
 .workoutPlay {
 	display: flex;
 	flex-direction: row;

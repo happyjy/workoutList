@@ -25,15 +25,6 @@ input[type='text'] {
 	border: red 1px solid;
 }
 
-.w80 {
-	width: 80px !important;
-}
-.w90 {
-	width: 90px !important;
-}
-.w100 {
-	width: 100px !important;
-}
 .w110 {
 	width: 110px !important;
 }
@@ -73,9 +64,7 @@ body {
 	height: 100%;
 }
 
-/*  */
-/* 왼쪽 */
-/*  */
+/* 운동 등록 화면 [운동 루틴 목록] */
 .workoutRoutineContentsContainer {
 	display: flex;
 	flex-direction: column;
@@ -134,9 +123,7 @@ body {
 	cursor: pointer;
 }
 
-/*  */
-/* 오른쪽 */
-/*  */
+/* 운동 등록 화면 [운동 목록] */
 .workoutContentsContainer {
 	display: flex;
 	flex-direction: column;
