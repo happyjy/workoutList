@@ -1,4 +1,4 @@
-console.log('### common');
+console.log('### rigistWorkoutRoutineProcess');
 
 /**
  * 새 운동 루틴 운동 추가
@@ -69,6 +69,7 @@ export function appendWorkoutRountine(templateDomList = []) {
   console.log('### appendWorkoutRountine');
   const copy = [...templateDomList];
   copy.forEach((node) => {
-    targetWorkoutRoutineListContainerDom.appendChild(node);
+    targetWorkoutRoutineListContainerDom &&
+      targetWorkoutRoutineListContainerDom.appendChild(node);
   });
 }

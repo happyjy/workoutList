@@ -1,3 +1,4 @@
+console.log('### utils.js');
 // import editIcon from '../img/editIcon.png';
 // setting localstorage
 // localStage
@@ -93,4 +94,16 @@ export function validation(HTMLCollection) {
   }
 
   return { result, resultObject };
+}
+
+/**
+ * render
+ */
+
+export function renderDomList(targetDom = document.body, domList = []) {
+  console.log('### renderDomList');
+  const copy = [...domList];
+  copy.forEach((node) => {
+    targetDom.appendChild(node);
+  });
 }

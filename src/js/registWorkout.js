@@ -1,5 +1,11 @@
 // import editIcon from '../img/editIcon.png';
-import { workoutList, setWorkoutList } from './dummyData';
+import {
+  workoutRoutineList,
+  workoutList,
+  setWorkoutList,
+  setWorkoutPlayData,
+} from './dummyData';
+import { showWorkoutPlay } from './init';
 import {
   renderWorkoutList,
   toggleRegisterWorkoutContainer,
@@ -14,7 +20,7 @@ console.log('### registWorkout.js');
  */
 
 // 운동 컨테이너
-const targetWorkoutListNestedContentsContainer = document.getElementById(
+const targetWorkoutListNestedContentsContainerDom = document.getElementById(
   'targetWorkoutListNestedContentsContainer',
 );
 // 운동 추가 버튼
@@ -37,14 +43,16 @@ const workoutTitleInputDom = document.getElementById('workoutTitle');
 const workoutSecondInputDom = document.getElementById('workoutSecond');
 const workoutTimesInputDom = document.getElementById('workoutTimes');
 
-// 운동 저장
+// 운동 저장 버튼
 const saveBtnRegistWorkOutBtnDom = document.getElementById(
   'saveBtnRegistWorkOutBtn',
 );
-// 운동 취소
+// 운동 취소 버튼
 const cancelBtnRegistWorkOutBtnDom = document.getElementById(
   'cancelBtnRegistWorkOutBtn',
 );
+// 운동 시작 버튼
+const startWorkOutBtnDom = document.getElementById('startWorkOutBtn');
 
 //[x] 툴바 > 전체시간(m분, n초)
 //[x] 툴바 > 삭제 버튼 기능
@@ -141,7 +149,7 @@ cancelBtnRegistWorkOutBtnDom.addEventListener('click', (e) => {
 });
 
 // 운동 수정
-targetWorkoutListNestedContentsContainer.addEventListener('click', (e) => {
+targetWorkoutListNestedContentsContainerDom.addEventListener('click', (e) => {
   console.log('### targetWorkoutListNestedContentsContainer > click');
 
   switch (e.target.id) {
@@ -151,7 +159,7 @@ targetWorkoutListNestedContentsContainer.addEventListener('click', (e) => {
 
       // open 운동 입력부
       const workoutRoutineIndex =
-        targetWorkoutListNestedContentsContainer.dataset.workoutRoutineIndex;
+        targetWorkoutListNestedContentsContainerDom.dataset.workoutRoutineIndex;
       toggleRegisterWorkoutContainer('edit', workoutRoutineIndex);
 
       const filterWorkoutList = workoutList.filter(
@@ -162,10 +170,42 @@ targetWorkoutListNestedContentsContainer.addEventListener('click', (e) => {
       workoutTitleInputDom.value = filterWorkoutList.title;
       workoutSecondInputDom.value = filterWorkoutList.second;
       workoutTimesInputDom.value = filterWorkoutList.times;
-
       break;
 
     default:
       break;
   }
 });
+
+// 운동 시작
+startWorkOutBtnDom.addEventListener('click', (e) => {
+  console.log('### startWorkOutBtnDom');
+  //1. filter 선택한 운동루틴, 운동 목록
+  const workoutRoutineIndex =
+    targetWorkoutListNestedContentsContainerDom.dataset.workoutRoutineIndex;
+  const workoutPlayRoutine = workoutRoutineList.filter(
+    (v) => v.index == workoutRoutineIndex,
+  )[0];
+  const workoutPlayList = workoutList.filter(
+    (v) => v.workoutRoutineIndex == workoutRoutineIndex,
+  );
+
+  //2. swap page 운동실행화면 with pass data from 1
+  var app = document.getElementById('app');
+  app.innerHTML = '';
+  app.innerHTML = showWorkoutPlay({ workoutPlayRoutine, workoutPlayList });
+  setWorkoutPlayData({ workoutPlayRoutine, workoutPlayList });
+
+  console.log('===> workoutPlay');
+  import('./workoutPlay.js') // .js can be skipped
+    .then((module) => {
+      console.log('===> workoutPlay');
+      module.setWorkoutPlayHeader();
+      module.setWorkoutPlayToolbar();
+      module.setWorkoutPlayList();
+      debugger;
+      // do something with the module
+    });
+});
+
+// export {workoutPlayRoutine, workoutPlayList};

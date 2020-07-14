@@ -1,4 +1,5 @@
 import { setLocalStorage } from './utils';
+console.log('### dummyData');
 // 운동 루틴 목록 List dummy data setting start
 // let workoutRoutineListDummyData = [];
 // const dummyData = {};
@@ -69,3 +70,15 @@ const setWorkoutList = (data) => {
 
 // update data workout routine, workout
 export { setWorkoutRoutineList, setWorkoutList };
+
+/**
+ * 운동 실행 데이터 설정
+ */
+let workoutPlayData = {};
+export function setWorkoutPlayData({ workoutPlayRoutine, workoutPlayList }) {
+  workoutPlayData = { workoutPlayRoutine, workoutPlayList };
+}
+
+export function getWorkoutPlayData() {
+  return workoutPlayData;
+}
