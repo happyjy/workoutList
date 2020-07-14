@@ -67,6 +67,10 @@ export function getWorkoutRountineListDom(workoutRoutineListDummyData = []) {
 
 export function appendWorkoutRountine(templateDomList = []) {
   console.log('### appendWorkoutRountine');
+  const targetWorkoutRoutineListContainerDom = document.getElementById(
+    'targetWorkoutRoutineListContainer',
+  );
+
   const copy = [...templateDomList];
   copy.forEach((node) => {
     targetWorkoutRoutineListContainerDom &&

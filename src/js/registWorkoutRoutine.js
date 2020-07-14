@@ -6,6 +6,7 @@ import {
   appendWorkoutRountine,
   toggleRegisterWorkoutRoutineInput,
 } from './registWorkoutRoutineProcess.js';
+import { initWorkoutRoutine } from './init';
 import { toggleRegisterWorkoutContainer } from './registWorkoutProcess';
 
 console.log('### registWorkoutRoutine');
@@ -58,25 +59,29 @@ const targetWorkoutListContainerDom = document.getElementById(
 
 // #init 운동 루틴 리스트(dom 생성 / append)
 // seesion workoutRoutineList 이용
-const seessionDataWorkoutRoutineList = getWorkoutRoutineList();
-// 최근것부터 보여주도록
-seessionDataWorkoutRoutineList.sort((a, b) => b.regDate++ - a.regDate++);
-const templateDomList = getWorkoutRountineListDom(
-  seessionDataWorkoutRoutineList,
-);
-appendWorkoutRountine(templateDomList);
+// export function initWorkoutRoutine() {
+//   const seessionDataWorkoutRoutineList = getWorkoutRoutineList();
+//   // 최근것부터 보여주도록
+//   seessionDataWorkoutRoutineList.sort((a, b) => b.regDate++ - a.regDate++);
+//   const templateDomList = getWorkoutRountineListDom(
+//     seessionDataWorkoutRoutineList,
+//   );
+//   appendWorkoutRountine(templateDomList);
 
-document.addEventListener('click', (e) => {
-  console.log('### document.addEventListener => click');
+//   document.addEventListener('click', (e) => {
+//     console.log('### document.addEventListener => click');
 
-  if (e.target === document.getElementsByTagName('body')[0]) {
-    //TODO [X] - 운동 루틴 선택하지 않은 클릭시 [전체 시간 표시] 사라짐.
-    //TODO [] - 운동 루틴 선택하지 않은 클릭시 [운동 추가], [삭제]버튼 비활성화 해야함
-    console.log('### ! workoutRoutineType');
-    clearWorkoutDom();
-    clearHighlight();
-  }
-});
+//     if (e.target === document.getElementsByTagName('body')[0]) {
+//       //TODO [X] - 운동 루틴 선택하지 않은 클릭시 [전체 시간 표시] 사라짐.
+//       //TODO [] - 운동 루틴 선택하지 않은 클릭시 [운동 추가], [삭제]버튼 비활성화 해야함
+//       console.log('### ! workoutRoutineType');
+//       clearWorkoutDom();
+//       clearHighlight();
+//     }
+//   });
+// }
+
+initWorkoutRoutine();
 
 // document.addEventListener('keypress', (e) => {
 //   console.log('### document.kepress: ', e.which);

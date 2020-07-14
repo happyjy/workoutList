@@ -80,16 +80,17 @@ export function setWorkoutPlayHeader() {
         - 운동 완료 
   */
   const workoutPlayListLength = sortedWorkoutPlayList.length; //운동 수
-
   let workoutIndexCount = 0; //운동 index
   let timesCount = 1; //세트수
   let secondCount = 0; //세트의 시간
 
   let currentWorkout; //현재 운동 종류
-  // let currentTimes; //현재 세트수
 
   const headerIntervalReturn = setInterval(() => {
     if (workoutPlayListLength === workoutIndexCount) {
+      //[x]완료 버튼 show
+      document.getElementById('workoutPlayFooterDone').style.display = 'block';
+
       workoutPlayHeaderDom.innerText = `${routineTitle} 완료`;
       return clearInterval(headerIntervalReturn);
     }
@@ -108,29 +109,25 @@ export function setWorkoutPlayHeader() {
         if (!currentWorkout1) {
           return false;
         }
-        currentWorkoutTitleDom.innerText = currentWorkout1.title; //현재 운동 이름 //3
+
+        //운동 아이템이 변할 때
+        workoutPlayItemUpdate();
+
+        currentWorkoutTitleDom.innerText = currentWorkout1.title; //현재 운동 이름
         currentWorkoutTimeDom.innerText = 0;
-        currentWorkoutSecondDom.innerText = currentWorkout1.second; //한 세트의 시간 //3
+        currentWorkoutSecondDom.innerText = currentWorkout1.second; //한 세트의 시간
         currentTimesDom.innerText = timesCount;
       } else {
         //step2.1 세트 수 다 못 채운 경우
         currentWorkoutTimeDom.innerText = 0;
-        currentTimesDom.innerText = timesCount; //n 세트 진행 중  //2
+        currentTimesDom.innerText = timesCount; //n 세트 진행 중
       }
       secondCount = 0;
     } else {
       //step1.1 설정 세트 시간을 못 채운 경우
-      currentWorkoutTimeDom.innerText = secondCount; //한 세트의 진행시간 //1
+      currentWorkoutTimeDom.innerText = secondCount; //한 세트의 진행시간
     }
-    // currentWorkoutTitleDom.innerText = currentWorkout.title; //현재 운동 이름
-    // currentWorkoutTimeDom.innerText = secondCount; //한 세트의 진행시간
-    // currentWorkoutSecondDom.innerText = currentWorkout.second; //한 세트의 시간
-    // currentTimesDom.innerText = timesCount;  //n 세트 진행 중
-    /*
-    # workoutIndex, second, times
-
-    */
-  }, 1000);
+  }, 500);
 
   // return workoutPlayHeaderDom;
 }
@@ -231,17 +228,20 @@ export function setWorkoutPlayToolbar() {
       formatString = leftSecondCount.toString();
       currentSecondDom.innerText = formatString.padStart(2, '0');
     }
-  }, 1000);
+  }, 500);
 }
 
 export function setWorkoutPlayList() {
   //운동 리스트 컨테이너
-  const targetWorkoutListContainerDom = document.getElementById(
-    'targetWorkoutListContainer',
+  const targetWorkoutPlayListContainerDom = document.getElementById(
+    'targetWorkoutPlayListContainer',
   );
   //운동 루틴, 운동 data
   const { workoutPlayRoutine, workoutPlayList } = getWorkoutPlayData();
-  //1. workoutPlayList template
+  /**
+   * # 1. 운동실행화면 - 운동목록 list
+   */
+  //## 1.1 workoutPlayList template
   const workoutPlayListTemplate = `
     <div data-index="{{index}}" data-workout-index="{{workoutIndex}}" 
       data-routine-index="{{workoutRoutineIndex}}" class="workoutPlay">
@@ -252,7 +252,7 @@ export function setWorkoutPlayList() {
     </div>
   `;
 
-  //2. workoutPlayList dom 생성
+  //## 1.2 workoutPlayList dom 생성
   const workoutPlayListDom = workoutPlayList
     .map((v) => {
       return workoutPlayListTemplate
@@ -270,6 +270,44 @@ export function setWorkoutPlayList() {
     'text/html',
   ).body.childNodes;
 
-  //3. render(append)
-  renderDomList(targetWorkoutListContainerDom, workoutPlayListDomTempate);
+  //## 1.3 render(append)
+  renderDomList(targetWorkoutPlayListContainerDom, workoutPlayListDomTempate);
+
+  debugger;
+  // workoutPlayListUpdate 작업1
+  targetWorkoutPlayListContainerDom.firstElementChild.classList += ' highlight';
+  /**
+   * # 2. 운동실행화면 - 운동목록 즉시 시작
+   * 2.1 첫번째 운동목록
+   * 2.2 운동 종류 바뀌면 hight 이동
+   * 2.3 완료된 운동 텍스트 색 다르게 표시
+   */
+}
+
+//workoutPlayListUpdate
+function workoutPlayItemUpdate() {
+  //운동 리스트 컨테이너
+  const targetWorkoutPlayListContainerDom = document.getElementById(
+    'targetWorkoutPlayListContainer',
+  );
+
+  // highlight update
+  const children = [...targetWorkoutPlayListContainerDom.children];
+  let i;
+  for (i = 0; i < children.length - 1; i++) {
+    const child = children[i];
+    const childClassList = [...child.classList];
+    const hasHighlight = childClassList.some((v) => v == 'highlight');
+
+    if (!!hasHighlight) {
+      //[x] highlight 이동
+      //[x] 완료 운동 아이템 글자색 변경
+      let newChildClassList = childClassList.filter((v) => v != 'highlight');
+      newChildClassList.push('doneItem');
+      child.classList = newChildClassList.join(' ');
+
+      children[i + 1].classList += ' highlight';
+      return false;
+    }
+  }
 }

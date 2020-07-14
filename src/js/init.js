@@ -1,7 +1,21 @@
+import { getWorkoutRoutineList, clearHighlight } from './utils';
+import { clearWorkoutDom } from './registWorkoutProcess';
+import {
+  getWorkoutRountineListDom,
+  appendWorkoutRountine,
+} from './registWorkoutRoutineProcess.js';
+
 console.log('### init.js');
 
 const el = document.querySelector('#app');
-el.innerHTML = `<div class="workoutRegistContainer">
+el.addEventListener('click', function (e) {
+  console.log('하: ', e.target);
+});
+el.innerHTML = wokroutRegisteTemplate();
+initWorkoutRoutine();
+
+export function wokroutRegisteTemplate() {
+  return `<div class="workoutRegistContainer">
   <!-- 상단헤더 -->
   <div class="workoutRegistHeader"> 매일 운동 루틴 </div>
 
@@ -79,6 +93,31 @@ el.innerHTML = `<div class="workoutRegistContainer">
   </div>
 </div>
 </div>`;
+}
+
+// #init 운동 루틴 리스트(dom 생성 / append)
+// seesion workoutRoutineList 이용
+export function initWorkoutRoutine() {
+  const seessionDataWorkoutRoutineList = getWorkoutRoutineList();
+  // 최근것부터 보여주도록
+  seessionDataWorkoutRoutineList.sort((a, b) => b.regDate++ - a.regDate++);
+  const templateDomList = getWorkoutRountineListDom(
+    seessionDataWorkoutRoutineList,
+  );
+  appendWorkoutRountine(templateDomList);
+
+  document.addEventListener('click', (e) => {
+    console.log('### document.addEventListener => click');
+
+    if (e.target === document.getElementsByTagName('body')[0]) {
+      //TODO [X] - 운동 루틴 선택하지 않은 클릭시 [전체 시간 표시] 사라짐.
+      //TODO [] - 운동 루틴 선택하지 않은 클릭시 [운동 추가], [삭제]버튼 비활성화 해야함
+      console.log('### ! workoutRoutineType');
+      clearWorkoutDom();
+      clearHighlight();
+    }
+  });
+}
 
 export function showWorkoutPlay({
   workoutPlayRoutine = {},
@@ -117,17 +156,9 @@ export function showWorkoutPlay({
     <div id="workoutPlayToolbar" class="workoutPlayToolbar"></div>
 
     <!-- 운동실행화면 컨테이너 -->
-    <div class="workoutPlayContainer">
-      <div class="workoutPlayContentsContainer">
-
-        <!-- 운동실행화면 운동목록 리스트 컨테이너 -->
-        <div class="workoutPlayListContentsContainer">
-          <div id="targetWorkoutListNestedContentsContainer" class="workoutPlayListNestedContentsContainer">
-            <!-- 운동실행화면 workout 목록 리스트-->
-            <div id="targetWorkoutListContainer" class="workoutPlayListNestedContainer" data-routine-index="17">
-            </div>
-          </div>
-        </div>
+    <div class="workoutPlayList">
+      <!-- 운동실행화면 workout 목록 리스트-->
+      <div id="targetWorkoutPlayListContainer" class="workoutPlayListContainer" data-routine-index="17">
       </div>
     </div>
 
@@ -136,7 +167,7 @@ export function showWorkoutPlay({
       <div class="workoutPlayFooterPause">일시정지</div>
       <div class="workoutPlayFooterRestart">재시작</div>
       <div class="workoutPlayFooterStop">운동멈추기</div>
-      <div class="workoutPlayFooterDone">완료</div>
+      <div id="workoutPlayFooterDone" class="workoutPlayFooterDone">완료</div>
     </div>
   </div>
   `;

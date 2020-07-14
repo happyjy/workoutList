@@ -11,6 +11,7 @@ import {
   toggleRegisterWorkoutContainer,
   saveWorkoutProcess,
 } from './registWorkoutProcess';
+import { wokroutRegisteTemplate } from './init';
 import { clearWorkoutInput } from './utils';
 
 console.log('### registWorkout.js');
@@ -88,16 +89,14 @@ workoutdeleteBtnDom.addEventListener('click', (e) => {
   workoutRoutineIndex = checkedWorkoutFirtstDom.dataset.routineIndex;
 
   // workout list except checked workout list
-  // const checkedWorkoutIndex = Object.keys(checkedWorkoutObj);
   const leftWorkoutList = workoutList.filter((v) => {
     return !checkedWorkoutObj[v.index];
   });
+
+  //refactoring: 뭐지?
   if (workoutList.length === 0 || leftWorkoutList.length === 0) {
     debugger;
   }
-  // const reRenderWorkoutList = workoutList
-  //   .filter((v) => v.workoutRoutineIndex === workoutRoutineIndex)
-  //   .filter((v) => !checkedWorkoutObj[v.workoutIndex]);
 
   // update workout dummy Data
   console.log('==> leftWorkoutList', leftWorkoutList);
@@ -191,7 +190,8 @@ startWorkOutBtnDom.addEventListener('click', (e) => {
   );
 
   //2. swap page 운동실행화면 with pass data from 1
-  var app = document.getElementById('app');
+  // var app = document.getElementById('app');
+  const app = document.querySelector('#app');
   app.innerHTML = '';
   app.innerHTML = showWorkoutPlay({ workoutPlayRoutine, workoutPlayList });
   setWorkoutPlayData({ workoutPlayRoutine, workoutPlayList });
@@ -199,12 +199,21 @@ startWorkOutBtnDom.addEventListener('click', (e) => {
   console.log('===> workoutPlay');
   import('./workoutPlay.js') // .js can be skipped
     .then((module) => {
+      // do something with the module
       console.log('===> workoutPlay');
       module.setWorkoutPlayHeader();
       module.setWorkoutPlayToolbar();
       module.setWorkoutPlayList();
       debugger;
-      // do something with the module
+
+      //[]refactoring: 이동 필요
+      const el = document.querySelector('#app');
+
+      document
+        .getElementById('workoutPlayFooterDone')
+        .addEventListener('click', function (e) {
+          el.innerHTML = wokroutRegisteTemplate();
+        });
     });
 });
 

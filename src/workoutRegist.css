@@ -158,7 +158,6 @@ body {
 /*  */
 /* 오른쪽 */
 /*  */
-.workoutPlayContentsContainer,
 .workoutContentsContainer {
   display: flex;
   flex-direction: column;
@@ -211,7 +210,6 @@ body {
   align-items: center;
 }
 
-.workoutPlayListContentsContainer,
 .workoutListContentsContainer {
   display: flex;
   flex-direction: column;
@@ -219,12 +217,14 @@ body {
   height: 100%;
 }
 
-.workoutPlayListNestedContentsContainer,
+/* .workoutPlayList, */
 .workoutListNestedContentsContainer {
   flex: 6;
   align-items: stretch;
   padding: 10px;
   margin-bottom: 10px;
+  height: calc(60vh - 125px);
+  overflow-y: auto;
   border: 1px solid black;
 }
 .workoutListContainer {
@@ -232,8 +232,7 @@ body {
   flex-direction: column;
 }
 
-.workoutPlayListNestedContainer,
-.workoutListNestedContainer {
+.orkoutPlayListContainer {
   /* border: red 1px solid; */
 }
 /* .workoutList:last-child { */
