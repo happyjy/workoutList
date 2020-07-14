@@ -1,6 +1,4 @@
-console.log('### eventFunction');
 const app = document.querySelector('#app');
-
 /**
  * workoutRoutine
  */

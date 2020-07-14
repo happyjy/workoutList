@@ -1,22 +1,20 @@
 .doneItem {
-  color: #bababa;
+	color: #bababa;
 }
 
 .workoutPlayList {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-rows: 100%;
-  height: 100%;
-  overflow-y: auto;
-  border: 1px solid black;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: 100%;
+	height: 100%;
+	overflow-y: auto;
+	border: 1px solid black;
 }
 
 /* 
   운동실행화면 헤더
   운동실행화면 툴바
   운동실행화면 footer(일시정지, 재시작, 운동멈추기, 완료)
-  
-  workoutRegistHeader 
 */
 .workoutPlayHeader,
 .workoutPlayToolbar,
@@ -24,13 +22,13 @@
 .workoutPlayFooterRestart,
 .workoutPlayFooterStop,
 .workoutPlayFooterDone {
-  text-align: center;
-  height: 4vh;
-  line-height: 4vh;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  border: 1px black solid;
-  background-color: #ffffff;
+	text-align: center;
+	height: 4vh;
+	line-height: 4vh;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	border: 1px black solid;
+	background-color: #ffffff;
 }
 
 /*
@@ -38,51 +36,27 @@
   workout
 */
 .workoutPlay {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px 20px;
-  margin: 2px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 10px 20px;
+	margin: 2px;
 }
 
 .workoutPlay:first-child {
-  /* border: 1px solid rebeccapurple; */
-  margin-top: 10px;
+	margin-top: 10px;
 }
-/* border: 1px solid rebeccapurple; */
-/* .workoutPlay:not(first-child) {
-  padding-top: 20px;
-} */
-
-/* workoutContentsContainer
-workoutListContentsContainer
-workoutListNestedContentsContainer
-workoutListNestedContainer */
-
-/* .workoutPlayListNestedContentsContainer {
-  padding: 0px !important;
-} */
 
 /* 운동실행화면 footer */
 .workoutPlayFooter {
-  display: flex;
-  flex-direction: row;
-  align-content: space-around;
+	display: flex;
+	flex-direction: row;
+	align-content: space-around;
 }
 .workoutPlayFooter > div {
-  flex: 1;
-  margin: 5px;
-}
-.workoutPlayFooterPause {
-  /* items: 1; */
-}
-.workoutPlayFooterRestart {
-  /* items: 1; */
-}
-.workoutPlayFooterStop {
-  /* items: 1; */
+	flex: 1;
+	margin: 5px;
 }
 .workoutPlayFooterDone {
-  display: none;
-  /* items: 1; */
+	display: none;
 }

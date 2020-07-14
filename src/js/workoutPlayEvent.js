@@ -4,8 +4,6 @@ import { getWorkoutTotalTime } from './registWorkoutProcess';
 import { renderDomList, useState } from './utils';
 import { workoutMainPage } from './wokroutEvent';
 
-console.log('### wokroutPlay > getWorkoutPlayData');
-
 let pauseFlag = false;
 let headerIntervalReturn;
 let toolbarIntervalReturn;
@@ -89,7 +87,7 @@ export function setWorkoutPlayHeader() {
 		}
 
 		if (workoutPlayListLength === workoutIndexCount) {
-			//[x]완료 버튼 show
+			//완료 버튼 show
 			document.getElementById('workoutPlayFooterDone').style.display = 'block';
 
 			workoutPlayHeaderDom.innerText = `${routineTitle} 완료`;
@@ -298,8 +296,8 @@ function workoutPlayItemUpdate() {
 		const hasHighlight = childClassList.some((v) => v == 'highlight');
 
 		if (!!hasHighlight) {
-			//[x] highlight 이동
-			//[x] 완료 운동 아이템 글자색 변경
+			// highlight 이동
+			// 완료 운동 아이템 글자색 변경
 			let newChildClassList = childClassList.filter((v) => v != 'highlight');
 			newChildClassList.push('doneItem');
 			child.classList = newChildClassList.join(' ');

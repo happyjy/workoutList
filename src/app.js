@@ -1,43 +1,23 @@
-// import { sum } from './js/math.js';
 import './js/initTemplate.js';
 import './js/init.js';
 import './js/domList.js';
 import './js/utils.js';
 import './js/dummyData.js';
-import './js/registWorkoutRoutine.js'; //제거예정
 import './js/registWorkoutRoutineProcess.js';
-import './js/registWorkout.js'; //제거예정
 import './js/registWorkoutProcess.js';
-import './js/workoutPlay.js';
+import './js/workoutPlayEvent.js';
 import './js/wokroutRoutinEvent.js';
 import './js/wokroutEvent.js';
 import './js/template';
 
 import './workoutRegist.css';
 import './workoutPlay.css';
-import soccer from './img/soccer.png';
-import addIcon from './img/addIcon.png';
-import deleteIcon from './img/deleteIcon.png';
-import editIcon from './img/editIcon.png';
+// import soccer from './img/soccer.png';
+// import addIcon from './img/addIcon.png';
+// import deleteIcon from './img/deleteIcon.png';
+// import editIcon from './img/editIcon.png';
 import { toggleRegisterWorkoutRoutineInput } from './js/registWorkoutRoutineProcess.js';
 import { toggleRegisterWorkoutContainer } from './js/registWorkoutProcess';
-
-console.log('### app.js');
-
-window.addEventListener('DOMContentLoaded', () => {
-	console.log('### DOMContentLoaded');
-	const el = document.querySelector('#app');
-	// el.innerHTML = `<h1>1+2=${sum(1, 2)}</h1>
-	// <img src="${soccer}" alt="webpack"/>
-	// <img src="${addIcon}" alt="webpack"/>
-	// `;
-
-	import('./js/domList.js') // .js can be skipped
-		.then((module) => {
-			// do something with the module
-			console.log('===> domList.js');
-		});
-});
 
 // 새 운동 루틴 추가 input box
 const targetRegisterWorkoutRoutineInputDom = document.getElementById('targetRegisterWorkoutRoutineInput');
@@ -48,8 +28,6 @@ const workoutSecondInputDom = document.getElementById('workoutSecond');
 const workoutTimesInputDom = document.getElementById('workoutTimes');
 
 document.onkeydown = (e) => {
-	console.log('### document.onkeydown ');
-
 	e = e || window.event;
 	var isEscape = false;
 	if ('key' in e) {

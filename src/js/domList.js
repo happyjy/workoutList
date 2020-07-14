@@ -1,5 +1,3 @@
-console.log('dom List');
-
 // 운동 리스트 컨테이너
 const targetWorkoutListContainerDom = document.getElementById('targetWorkoutListContainer');
 

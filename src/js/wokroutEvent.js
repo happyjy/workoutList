@@ -1,48 +1,18 @@
-import {
-	workoutRoutineList,
-	setWorkoutRoutineList,
-	workoutList,
-	setWorkoutList,
-	setWorkoutPlayData
-} from './dummyData';
-
-import {
-	targetWorkoutListContainerDom,
-	targetWorkoutListNestedContentsContainerDom,
-	targetRegisterWorkoutRoutineDom,
-	targetRegisterWorkoutRoutineInputDom,
-	targetWorkoutRoutineListContainerDom,
-	registWorkoutContainerDom,
-	workoutTitleInputDom,
-	workoutSecondInputDom,
-	workoutTimesInputDom
-} from './domList';
-
-import { initWorkoutRoutine } from './registWorkoutRoutineProcess';
-
+import { initWorkoutRoutine, toggleRegisterWorkoutRoutineInput } from './registWorkoutRoutineProcess';
 import { renderWorkoutList, toggleRegisterWorkoutContainer, saveWorkoutProcess } from './registWorkoutProcess';
-
-import {
-	getWorkoutRountineListDom,
-	appendWorkoutRountine,
-	toggleRegisterWorkoutRoutineInput
-} from './registWorkoutRoutineProcess.js';
-
-import { getWorkoutRoutineList, clearHighlight, clearWorkoutInput, useState } from './utils';
-
+import { workoutRoutineList, workoutList, setWorkoutList, setWorkoutPlayData } from './dummyData';
+import { clearWorkoutInput } from './utils';
 import { wokroutRegisteTemplate } from './template';
 
-console.log('### eventFunction');
 export function registerWorkoutRoutine(e) {
 	console.log('### 새 운동 루틴 버튼');
+	// 새 운동 루틴 inputbox
+	const targetRegisterWorkoutRoutineInputDom = document.getElementById('targetRegisterWorkoutRoutineInput');
 	// toggle 새 운동 루틴 추가 input box
-	let display = 'block';
 	toggleRegisterWorkoutRoutineInput('new');
 
 	//새 운동 루틴 버튼 추가시 자동으로 focus
 	targetRegisterWorkoutRoutineInputDom.focus();
-
-	//[]TODO 가로 길이 늘어남
 }
 
 export function showWorkoutInputNewMode(e) {
@@ -80,7 +50,6 @@ export function workoutdeleteBtn(e) {
 	});
 
 	// update workout dummy Data
-	console.log('==> leftWorkoutList', leftWorkoutList);
 	setWorkoutList(leftWorkoutList);
 
 	// reRender workout list
@@ -110,6 +79,7 @@ export function showWorkoutInputEditMode(e) {
 	console.log('### targetWorkoutListNestedContentsContainer > click');
 	// 운동 입력부 컨테이너
 	const registWorkoutContainerDom = document.getElementById('registWorkOutContainer');
+
 	// 운동 컨테이너
 	const targetWorkoutListNestedContentsContainerDom = document.getElementById(
 		'targetWorkoutListNestedContentsContainer'
@@ -131,6 +101,7 @@ export function showWorkoutInputEditMode(e) {
 			const filterWorkoutList = workoutList.filter((v) => v.index === e.target.dataset.index)[0];
 
 			// init 입력부
+			workoutTitleInputDom.focus();
 			workoutTitleInputDom.value = filterWorkoutList.title;
 			workoutSecondInputDom.value = filterWorkoutList.second;
 			workoutTimesInputDom.value = filterWorkoutList.times;
@@ -165,15 +136,11 @@ export function startWorkout(e) {
 	app.innerHTML = showWorkoutPlay({ workoutPlayRoutine, workoutPlayList });
 	setWorkoutPlayData({ workoutPlayRoutine, workoutPlayList });
 
-	console.log('===> workoutPlay');
-	import('./workoutPlay.js') // .js can be skipped
-		.then((module) => {
-			// do something with the module
-			console.log('===> workoutPlay');
-			module.setWorkoutPlayHeader();
-			module.setWorkoutPlayToolbar();
-			module.setWorkoutPlayList();
-		});
+	import('./workoutPlayEvent.js').then((module) => {
+		module.setWorkoutPlayHeader();
+		module.setWorkoutPlayToolbar();
+		module.setWorkoutPlayList();
+	});
 }
 
 export function workoutMainPage(e) {

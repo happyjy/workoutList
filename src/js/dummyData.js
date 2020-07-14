@@ -1,12 +1,10 @@
-import { setLocalStorage } from './utils';
-console.log('### dummyData');
 // 운동 루틴 목록 List dummy data setting start
 const workoutRoutineListDummyData = JSON.parse(localStorage.getItem('workoutRoutineListDummyData')) || [];
 const workoutListDummyData = JSON.parse(localStorage.getItem('workoutListDummyData')) || [];
 
 // init setting LocalStorage
 if (!localStorage.getItem('workoutRoutineListDummyData')) {
-	for (let i = 0; i < 20; i++) {
+	for (let i = 0; i < 30; i++) {
 		let date = new Date();
 		const regDate = date.setSeconds(i);
 		workoutRoutineListDummyData.push({
@@ -22,8 +20,8 @@ if (!localStorage.getItem('workoutRoutineListDummyData')) {
 
 if (!localStorage.getItem('workoutListDummyData')) {
 	let workoutListDummyDataIndex = 0;
-	for (let i = 0; i < 20; i++) {
-		for (let j = 0; j < 5; j++) {
+	for (let i = 0; i < 30; i++) {
+		for (let j = 0; j < 20; j++) {
 			let date = new Date();
 			const regDate = date.setSeconds(i);
 			workoutListDummyData.push({
@@ -42,8 +40,6 @@ if (!localStorage.getItem('workoutListDummyData')) {
 	setLocalStorage('workoutListDummyData', workoutListDummyData);
 }
 
-// let workoutRoutineList = dummyData.workoutRoutineListDummyData;
-// let workoutList = dummyData.workoutListDummyData;
 let workoutRoutineList = workoutRoutineListDummyData;
 let workoutList = workoutListDummyData;
 
@@ -51,12 +47,10 @@ let workoutList = workoutListDummyData;
 export { workoutRoutineList, workoutList };
 
 const setWorkoutRoutineList = (data) => {
-	// dummyData.workoutRoutineListDummyData = data;
 	workoutRoutineList = data;
 	setLocalStorage('workoutRoutineListDummyData', data);
 };
 const setWorkoutList = (data) => {
-	// dummyData.workoutListDummyData = data;
 	workoutList = data;
 	setLocalStorage('workoutListDummyData', data);
 };
@@ -74,4 +68,8 @@ export function setWorkoutPlayData({ workoutPlayRoutine, workoutPlayList }) {
 
 export function getWorkoutPlayData() {
 	return workoutPlayData;
+}
+
+export function setLocalStorage(key, workoutRoutineListDummyData) {
+	localStorage.setItem(key, JSON.stringify(workoutRoutineListDummyData));
 }

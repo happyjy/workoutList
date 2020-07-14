@@ -18,9 +18,7 @@ import {
 	workoutMainPage
 } from './wokroutEvent';
 
-import { workoutPlayPause, workoutPlayRestart, workoutPlayStop } from './workoutPlay';
-
-console.log('### init.js');
+import { workoutPlayPause, workoutPlayRestart, workoutPlayStop } from './workoutPlayEvent';
 
 // 데이터 초기화
 initWorkoutRoutine();
@@ -101,7 +99,6 @@ app.addEventListener('click', function(e) {
 });
 
 app.addEventListener('keypress', function(e) {
-	console.log('### app > keypress');
 	switch (e.target.id) {
 		//# workout routine
 		case 'targetRegisterWorkoutRoutineInput':
@@ -118,7 +115,6 @@ app.addEventListener('keypress', function(e) {
 });
 
 app.addEventListener('focusout', function(e) {
-	console.log('### app > focusout');
 	switch (e.target.id) {
 		//# workout routine
 		case 'workoutTitle':
@@ -130,7 +126,6 @@ app.addEventListener('focusout', function(e) {
 });
 
 app.addEventListener('keydown', function(e) {
-	console.log('### app > keydown');
 	switch (e.target.id) {
 		//# workout routine
 		case 'workoutTitle':

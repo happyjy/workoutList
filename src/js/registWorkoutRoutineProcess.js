@@ -2,8 +2,22 @@ import { getWorkoutRoutineList, clearHighlight } from './utils';
 import { clearWorkoutDom } from './registWorkoutProcess';
 import { workoutRoutineTemplate } from './template';
 
-console.log('### registWorkoutRoutineProcess');
+export function showRegisterWorkoutRoutineInput(show = true) {
+	// 새 운동 루틴 버튼
+	const targetRegisterWorkoutRoutineDom = document.getElementById('targetRegisterWorkoutRoutine');
+	// 새 운동 루틴 inputbox
+	const targetRegisterWorkoutRoutineInputDom = document.getElementById('targetRegisterWorkoutRoutineInput');
+	let display;
+	if (show) {
+		display = 'block';
+	} else {
+		display = 'none';
+	}
 
+	targetRegisterWorkoutRoutineInputDom.value = '';
+	delete targetRegisterWorkoutRoutineDom.dataset.mode;
+	targetRegisterWorkoutRoutineDom.style.display = display;
+}
 // toogle rigister workout routin input
 export function toggleRegisterWorkoutRoutineInput(mode = '', index = '') {
 	let display = '';
@@ -30,7 +44,6 @@ export function toggleRegisterWorkoutRoutineInput(mode = '', index = '') {
 
 // get workout routine list dom
 export function getWorkoutRountineListDom(workoutRoutineListDummyData = []) {
-	console.log('### getWorkoutRountineListDom');
 	const template = workoutRoutineListDummyData
 		.map((v) => workoutRoutineTemplate.replace(/\{\{index\}\}/g, v.index).replace('{{title}}', v.title))
 		.join('');
@@ -40,11 +53,9 @@ export function getWorkoutRountineListDom(workoutRoutineListDummyData = []) {
 
 // append routine Dom
 export function appendWorkoutRountine(templateDomList = []) {
-	console.log('### appendWorkoutRountine');
 	// 새 운동 루틴 추가 컨테이너(edit, delete 컨테이너)
 	const targetWorkoutRoutineListContainerDom = document.getElementById('targetWorkoutRoutineListContainer');
 
-	// debugger;
 	const copy = [ ...templateDomList ];
 	copy.forEach((node) => {
 		targetWorkoutRoutineListContainerDom.appendChild(node);
@@ -61,12 +72,7 @@ export function initWorkoutRoutine() {
 	appendWorkoutRountine(templateDomList);
 
 	document.addEventListener('click', (e) => {
-		console.log('### document.addEventListener => click');
-
 		if (e.target === document.getElementsByTagName('body')[0]) {
-			//TODO [X] - 운동 루틴 선택하지 않은 클릭시 [전체 시간 표시] 사라짐.
-			//TODO [] - 운동 루틴 선택하지 않은 클릭시 [운동 추가], [삭제]버튼 비활성화 해야함
-			console.log('### ! workoutRoutineType');
 			clearWorkoutDom();
 			clearHighlight();
 		}

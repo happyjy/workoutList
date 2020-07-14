@@ -1,31 +1,18 @@
-import {
-	workoutRoutineList,
-	setWorkoutRoutineList,
-	workoutList,
-	setWorkoutList,
-	setWorkoutPlayData
-} from './dummyData';
+import { workoutRoutineList, setWorkoutRoutineList } from './dummyData';
 
-import { renderWorkoutList, clearWorkoutDom } from './registWorkoutProcess';
+import { renderWorkoutList } from './registWorkoutProcess';
 
 import {
 	getWorkoutRountineListDom,
 	appendWorkoutRountine,
-	toggleRegisterWorkoutRoutineInput
+	toggleRegisterWorkoutRoutineInput,
+	showRegisterWorkoutRoutineInput
 } from './registWorkoutRoutineProcess.js';
 
-import { getWorkoutRoutineList, clearHighlight, useState } from './utils';
-// import {
-// 	targetWorkoutListContainerDom,
-// 	targetWorkoutListNestedContentsContainerDom,
-// 	targetRegisterWorkoutRoutineDom,
-// 	targetRegisterWorkoutRoutineInputDom,
-// 	targetWorkoutRoutineListContainerDom
-// } from './domList';
+import { clearHighlight } from './utils';
 
 import { workoutRoutineTemplate } from './template';
 
-console.log('### workoutRoutineEvent.js');
 export function registerWorkoutRoutine(e) {
 	console.log('### 새 운동 루틴 버튼');
 	// 새 운동 루틴 inputbox
@@ -37,14 +24,12 @@ export function registerWorkoutRoutine(e) {
 
 	//새 운동 루틴 버튼 추가시 자동으로 focus
 	targetRegisterWorkoutRoutineInputDom.focus();
-
-	//[]TODO 가로 길이 늘어남
 }
 
 export function registerWorkoutRoutineInputDom(e) {
 	if (e.key === 'Enter') {
 		console.log('### 새 운동 루틴 추가 enter');
-		//운동루틴 목록 최상단에 노출
+		// 운동루틴 목록 최상단에 노출
 		const inputTitle = e.target.value;
 		// 새 운동 루틴 버튼
 		const targetRegisterWorkoutRoutineDom = document.getElementById('targetRegisterWorkoutRoutine');
@@ -94,7 +79,7 @@ export function registerWorkoutRoutineInputDom(e) {
 				break;
 		}
 
-		// [x]TODO 입력부 제거
+		// 입력부 제거
 		e.target.value = '';
 		// toogle 새 운동 루틴 추가
 		toggleRegisterWorkoutRoutineInput();
@@ -109,13 +94,16 @@ export function workoutRoutineType(e) {
 	);
 	const targetWorkoutListContainerDom = document.getElementById('targetWorkoutListContainer');
 
+	// close workout routine input
+	showRegisterWorkoutRoutineInput(false);
+
 	// render workout list
 	renderWorkoutList(workoutRoutineIndex);
 
 	// setting workout index 운동 등록 컨테이너
 	targetWorkoutListNestedContentsContainerDom.dataset.workoutRoutineIndex = workoutRoutineIndex;
 
-	//[x]highlight
+	//highlight
 	clearHighlight();
 	e.target.parentElement.className += ' highlight';
 
@@ -134,7 +122,6 @@ export function workoutRoutineEdit(e) {
 		toggleRegisterWorkoutRoutineInput('edit', e.target.dataset.index);
 	}
 
-	//[X]TODO 입력부 input에 클릭한 title 입력, 입력부로 focus 이동
 	const clickedRoutine = workoutRoutineList.filter((v) => v.index === e.target.dataset.index)[0];
 	targetRegisterWorkoutRoutineInputDom.value = clickedRoutine.title;
 	targetRegisterWorkoutRoutineInputDom.focus();
@@ -146,7 +133,6 @@ export function workoutRoutineDelete(e) {
 	const targetWorkoutRoutineListContainerDom = document.getElementById('targetWorkoutRoutineListContainer');
 	const result = confirm('삭제하시겠습니까?');
 
-	debugger;
 	if (result) {
 		// dummyData에서 삭제할 것 제외한 데이터 다시 render
 		const willNotDeleteOne = workoutRoutineList

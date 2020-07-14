@@ -2,7 +2,6 @@ import { clearWorkoutInput, validation } from './utils';
 import { workoutList, setWorkoutList } from './dummyData';
 import { workoutTemplate } from './template';
 
-console.log('### registWorkoutProcess');
 /**
  *  workout
  */
@@ -36,7 +35,6 @@ export function getWorkoutListDom(workoutRoutineIndex = '') {
 }
 
 export function appendWorkout(workoutDomList = []) {
-	console.log('### appendWorkout');
 	// 운동 리스트 컨테이너
 	const targetWorkoutListContainerDom = document.getElementById('targetWorkoutListContainer');
 	const copy = [ ...workoutDomList ];
@@ -120,6 +118,20 @@ export function toggleRegisterWorkoutContainer(mode = '', index = '') {
 	const workoutTitleInputDom = document.getElementById('workoutTitle');
 	const workoutSecondInputDom = document.getElementById('workoutSecond');
 	const workoutTimesInputDom = document.getElementById('workoutTimes');
+	// 운동 컨테이너
+	const targetWorkoutListNestedContentsContainerDom = document.getElementById(
+		'targetWorkoutListNestedContentsContainer'
+	);
+
+	//edit 에서 new로 변경되는 경우
+	if (registWorkoutContainerDom.dataset.mode === 'edit' && mode === 'new') {
+		workoutTitleInputDom.value = '';
+		workoutSecondInputDom.value = '';
+		workoutTimesInputDom.value = '';
+
+		registWorkoutContainerDom.dataset.mode = mode;
+		return;
+	}
 
 	if (registWorkoutContainerDom.style.display === 'block' && mode !== 'edit') {
 		display = 'none';
@@ -142,16 +154,17 @@ export function toggleRegisterWorkoutContainer(mode = '', index = '') {
 		// init input 운동시간 30초, 세트 1회
 		if (mode === 'new') {
 			workoutTitleInputDom.focus();
-			//refactoring: static variables로 변경하기
 			workoutSecondInputDom.value = 30;
 			workoutTimesInputDom.value = 1;
 		}
 	}
+
+	// move to scroll bottom
+	targetWorkoutListNestedContentsContainerDom.scrollTop = targetWorkoutListNestedContentsContainerDom.scrollHeight;
 }
 
 export function saveWorkoutProcess() {
-	//validation
-	let resultValidation;
+	// validation
 	// 운동 입력부 컨테이너
 	const registWorkoutContainerDom = document.getElementById('registWorkOutContainer');
 	// 운동 리스트 컨테이너
@@ -185,7 +198,6 @@ export function saveWorkoutProcess() {
 
 			//3. update workout dummy Data
 			let date = new Date();
-			console.log(workoutList);
 			workoutList.push({
 				index: parseInt(maxIndex) + 1 + '',
 				workoutIndex: parseInt(maxWorkoutIndex) + 1 + '',
