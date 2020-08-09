@@ -3,7 +3,7 @@ import { workoutList, setWorkoutList } from './dummyData';
 import { workoutTemplate } from './template';
 
 /**
- *  workout
+ *  workout, workoutPlay
  */
 // get workout list
 export function getWorkoutList(workoutRoutineIndex = '') {
