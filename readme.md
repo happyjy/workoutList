@@ -1,8 +1,9 @@
 # 실행방법
 
 ```
-npm i 
-npm 
+yarn install 
+yarn build
+src/index.html 실행
 ```
 
 1. 사용된 파일 목록
